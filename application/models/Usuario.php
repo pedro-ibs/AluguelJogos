@@ -35,7 +35,6 @@ class Usuario extends CI_Model{
     }
 
     public function deletarUsuario ($email, $senha){
-        // TODO:  FAZER DELITE WERE
-        return $query;
+        $this->db->delete('Usuario', array('email=' => $email), array('senha=' => $senha));
     }
 }

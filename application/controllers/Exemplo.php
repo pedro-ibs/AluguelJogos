@@ -20,7 +20,7 @@ class Exemplo extends CI_Controller {
     public function index()
 	{
         $this->data["info"] = $this->m_exemplo->mostrarUsuario2('affg@gmail.com', '12345');
-        $this->m_exemplo->adicionarUsuario('opa', 'opa', 'opa', 'opa');
+        $this->m_exemplo->deletarUsuario('opa', 'opa');
         
         
         //Utilize sempre esse nome no $this->data["content"].
