@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Produto extends CI_Model{
+class Jogo_categoria extends CI_Model{
 
     function __construct() {
         parent::__construct();       
@@ -9,55 +9,40 @@ class Produto extends CI_Model{
     }
 
     public function listarTodos(){
-        $query = $this->db->get("Produto")->result();
+        $query = $this->db->get("Jogo_categoria")->result();
         return $query;
     }
 
-    public function mostrarProduto1($id){
-        $query = $this->db->get_where('Produto', array('id=' => $id))->result();
+    public function mostrarJogo_categoria1($id){
+        $query = $this->db->get_where('Jogo_categoria', array('id=' => $id))->result();
         return $query;
     }
 
-    public function mostrarProduto2($id_jogo){
-        $query = $this->db->get_where('Produto', array('id_jogo=' => $id_jogo))->result();
+    public function mostrarJogo_categoria2($id_jogo){
+        $query = $this->db->get_where('Jogo_categoria', array('id_jogo=' => $id_jogo))->result();
         return $query;
     }
 
-    public function mostrarProduto3($id_usuario){
-        $query = $this->db->get_where('Produto', array('id_usuario=' => $id_usuario))->result();
+    public function mostrarJogo_categoria3($id_categoria){
+        $query = $this->db->get_where('Jogo_categoria', array('id_categoria=' => $id_categoria))->result();
         return $query;
     }
 
-    public function adicionarProduto ($id_jogo, $id_usuario, $id_categoria, $tipo, $preco, $descricao,){
+    public function adicionarJogo_categoria ($id_jogo, $id_categoria){
         $data = array(
             'id_jogo'       => $id_jogo,
-            'id_usuario'    => $id_usuario,
             'id_categoria'  => $id_categoria,
-            'tipo'          => $tipo,
-            'preco'         => $preco,
-            'descricao'     => $descricao,
-            'status'        => '0'  
         );
 
-        $this->db->insert('Produto', $data);
+        $this->db->insert('Jogo_categoria', $data);
     }
 
-
-    public function ativarProduto ($id){
-        $data = $this->mostrarProduto1($id);
-        $data->status = '1';
-        $this->db->update('Produto', $data, array('id' => $id));
+    public function deletarJogo_categoria1 ($id_jogo){
+        $this->db->delete('Jogo_categoria', array('id_jogo=' => $id_jogo));
     }
 
-    public function pausarProduto ($id){
-        $data = $this->mostrarProduto1($id);
-        $data->status = '0';
-        $this->db->update('Produto', $data, array('id' => $id));
+    public function deletarJogo_categoria2 ($id_categoria){
+        $this->db->delete('Jogo_categoria', array('id_categoria=' => $id_categoria));
     }
 
-    public function deletarProduto ($id){
-        $data = $this->mostrarProduto1($id);
-        $data->status = '2';
-        $this->db->update('Produto', $data, array('id' => $id));
-    }
-}
+} 
