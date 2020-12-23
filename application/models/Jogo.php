@@ -7,7 +7,7 @@ class Jogo extends CI_Model{
         parent::__construct();       
         $this->db = $this->load->database("default", true);
     }
-
+    
     public function listarTodos(){
         $query = $this->db->get("Jogo")->result();
         return $query;
