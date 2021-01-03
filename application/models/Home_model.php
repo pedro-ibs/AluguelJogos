@@ -6,45 +6,34 @@ class Home_model extends CI_Model{
     function __construct() 
     {
         parent::__construct();
-        $this->data["dados"] = $this->dados;
     }
 
-    public function get_cards($subcategoria)
+    public function get_cards($id)
     {
-        $query = $this->db->get_where("Categoria", "nome = '$subcategoria'")->row();
+        $query = $this->db->get_where("Jogo_categoria", "id_categoria = $id")->result();
 
-        $query2 = $this->db->get_where("Servico", "ativo = 1 AND id_categoria = $query->id")->result();
-
-        foreach($query2 as $item)
+        $rst = array();
+        foreach($query as $item)
         {
-            $this->db->select("usu.nome, usu.sobrenome");
-            $this->db->join("Usuario usu", "usu.id = usuSer.id_usuario");
-            $item->usuario = $this->db->get_where("UsuarioServico usuSer", "usuSer.id_servico = '$item->id'")->row();
-
-            $this->db->group_by("id", "desc");
-            $item->feedback = $this->db->get_where("Feedback", "id_servico = '$item->id'")->row();
+            $rst[] = $this->db->get_where("Jogo", "id = '$item->id_jogo'")->row();
         }
 
-        return $query2;
+        return $rst;
     }
 
-    public function get_servico_info($servico)
+    public function get_jogo_info($id)
     {
-        $query = $this->db->get_where("Servico", "nome = '$servico'")->row();
+        $query = $this->db->get_where("Jogo", "id = '$id'")->row();
 
-        $query->favoritos = $this->db->get_where("Favoritos", "id_servico = '$query->id'")->row();
+        $this->db->select("cat.*");
+        $this->db->join("Categoria cat", "cat.id = jocat.id_categoria");
+        $query->categoria = $this->db->get_where("Jogo_categoria jocat", "jocat.id_jogo = '$id'")->result();
 
-        $query->pagamento = $this->db->get_where("PagamentoServico", "id_servico = '$query->id'")->result();
+        $query->marca = $this->db->get_where("Marca", "id = '$query->id_marca'")->row();
 
-        $this->db->order_by("ativo", "desc");
-        $query->imagens = $this->db->get_where("Imagens", "id_servico = '$query->id'")->result();
+        $query->produto = $this->db->get_where("Produto", "id_jogo = '$id'")->row();
 
-        $query->perguntas = $this->db->get_where("Perguntas", "id_servico = '$query->id'")->result();
-
-        // echo '<pre>';
-        // print_r($query);
-        // echo '</pre>';
-        // exit;
+        // $query->perguntas = $this->db->get_where("Perguntas", "id_servico = '$query->id'")->result();
 
         return $query;
     }

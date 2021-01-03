@@ -4,24 +4,16 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="<?= base_url("") ?>" class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="<?= base_url("Home/lista") ?>" class="nav-link">Lista</a>
+      <li class="nav-item dropdown user-menu">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+          Categoria
+        </a>
+        <ul class="dropdown-menu">
+          <?php foreach($categorias as $item): ?>
+            <li><a class="dropdown-item" href="<?= base_url("Home/lista/").$item->nome."/".$item->id ?>"><?= $item->nome ?></a></li>
+          <?php endforeach; ?>
+        </ul>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="<?= base_url("Home/detalhes"); ?>" class="nav-link">Detalhes</a>
-      </li>
-      <?php foreach($categorias[0]["filho"] as $item): ?>
-        <li class="nav-item dropdown user-menu">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-            <?= $item["nome"] ?>
-          </a>
-          <ul class="dropdown-menu">
-            <?php foreach($item["filho"] as $value): ?>
-              <li><a class="dropdown-item" href="<?= base_url("Home/lista/").$item["nome"]."/".$value->nome ?>"><?= $value->nome ?></a></li>
-            <?php endforeach; ?>
-          </ul>
-        </li>
-      <?php endforeach; ?>
     </ul>
 
     <!-- SEARCH FORM -->
@@ -42,18 +34,14 @@
       <?php else: ?>
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-          <!-- <img src="https://www.microlins.com.br/galeria/repositorio/images/noticias/como-posicionar-melhor-seu-perfil-no-linkedin/02-Como-posicionar-melhor-seu-perfil-do-Linkedin.png" class="user-image img-circle elevation-2" alt="User Image"> -->
-          <span class="d-none d-md-inline"><?= $dados->nome." ".$dados->sobrenome ?></span>
+          <span class="d-none d-md-inline"><?= $dados->nome ?></span>
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <li class="bg-warning">
-            <div class="text-center pt-3">
-              <img src="https://www.microlins.com.br/galeria/repositorio/images/noticias/como-posicionar-melhor-seu-perfil-no-linkedin/02-Como-posicionar-melhor-seu-perfil-do-Linkedin.png" class="img-circle elevation-2" alt="User Image" style="max-width: 75px;">
-            </div>
+          <li class="bg-danger">
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12 p-4">
                 <p class="text-center">
-                  <?= $dados->nome." ".$dados->sobrenome ?>
+                  <?= $dados->nome ?>
                   <br/>
                   <small>Membro desde <?= formata_data_info($dados->data_criacao) ?></small>
                 </p>

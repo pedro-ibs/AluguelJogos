@@ -11,6 +11,8 @@ class Usuario extends CI_Controller{
         $this->dados = $this->session->userdata("dados" . APPNAME);
         $this->data["dados"] = $this->dados;
 
+        $this->data["categorias"] = $this->m_sistema->get_categorias();
+
         $this->load->model("Usuario_model", "m_usuario");
 
         $this->data["header"] = $this->load->view("template/header", $this->data, true);

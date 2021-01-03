@@ -13,7 +13,6 @@ class Usuario_model extends CI_Model{
         "logged" => false, 
         "error" => "",     
         "nome" => "",
-        "sobrenome" => "",
         "email" => "", 
         "data_criacao" => "",
         "usuario_id" => 0,
@@ -56,7 +55,6 @@ class Usuario_model extends CI_Model{
         {
             $loginData->usuario_id = $query->id;
             $loginData->nome = $query->nome;
-            $loginData->sobrenome = $query->sobrenome;
             $loginData->email = $query->email;
             $loginData->data_criacao = formatar($query->data_insercao, "bd2dt");
             $loginData->data_autentificacao = date("d-m-Y h:i:s");
@@ -71,21 +69,13 @@ class Usuario_model extends CI_Model{
         $data = (object)$this->input->post();
         $rst = (object)array("rst" => 0, "msg" => "");
 
-        if($this->verifica_email(strtolower($data->email)) && (!isset($data->id_usuario) || isset($data->id_usuario) && $data->id_usuario))
+        if($this->verifica_email(strtolower($data->email)) && (!isset($data->id_usuario) || isset($data->id_usuario) && empty($data->id_usuario)))
         {
             $this->db->set("nome", $data->nome);
-            $this->db->set("sobrenome", $data->sobrenome);
-            $this->db->set("cpf", somente_numeros($data->cpf));
-            $this->db->set("data_nascimento", formatar($data->data_nascimento, "dt2bd"));
-            $this->db->set("telefone", somente_numeros($data->telefone));
-            $this->db->set("celular", somente_numeros($data->celular));
-            $this->db->set("endereco", $data->endereco);
-            $this->db->set("numero", somente_numeros($data->numero));
-            $this->db->set("bairro", $data->bairro);
-            $this->db->set("cidade", $data->cidade);
-            $this->db->set("estado", $data->estado);
             $this->db->set("email", strtolower($data->email));
             $this->db->set("senha", md5($data->senha));
+            $this->db->set("bio", $data->bio);
+            $this->db->set("data_insercao", "date('now')", false);
 
             if(isset($data->id_usuario) && $data->id_usuario)
             {

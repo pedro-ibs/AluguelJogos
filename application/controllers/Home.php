@@ -15,7 +15,7 @@ class Home extends CI_Controller{
         
         $this->load->model("Home_model", "m_home");
 
-        $local = str_replace("TCC/", "", $_SERVER["REQUEST_URI"]);
+        $local = str_replace("AluguelJogos/", "", $_SERVER["REQUEST_URI"]);
         $this->session->set_userdata(array("local" => $local));
         $this->data["local"] = $local;
 
@@ -36,9 +36,9 @@ class Home extends CI_Controller{
         $this->load->view("template/content", $this->data);
     }
 
-    public function lista($categoria = null, $subcategoria = null)
+    public function lista($categoria = null, $id = null)
     {
-        $this->data["cards"] = $this->m_home->get_cards($subcategoria);
+        $this->data["cards"] = $this->m_home->get_cards($id);
         //Faz a parte das categorias.
         $this->data["breadcrumb"] = (object)array("titulo" => "Lista de Produtos/Serviços", "before" => array((object) array("nome" => "Nome da Pagina Anterior", "link" => "Home")), "current" => "Nome da pagina atual");
 
@@ -46,9 +46,9 @@ class Home extends CI_Controller{
         $this->load->view("template/content", $this->data);
     }
 
-    public function detalhes($servico)
+    public function detalhes($id)
     {
-        $this->data["info"] = $this->m_home->get_servico_info($servico);
+        $this->data["info"] = $this->m_home->get_jogo_info($id);
 
         $this->data["breadcrumb"] = (object)array("titulo" => "Detalhes de Produtos/Serviços", "before" => array((object)array("nome" => "Home", "link" => "Home"), (object)array("nome" => "Categoria dele", "link" => "Home/lista")), "current" => "Nome do produto");;
 

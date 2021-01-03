@@ -1,26 +1,5 @@
 $(document).ready(function(){
 
-    $('.select2').select2()
-
-    $('#cpf').inputmask({
-        mask: ['999.999.999-99'],
-        keepStatic: true
-    });
-    $('#telefone').inputmask({
-        mask: ['(99) 9999-9999'],
-        keepStatic: true
-    });
-    $('#celular').inputmask({
-        mask: ['(99) 99999-9999'],
-        keepStatic: true
-    });
-    $('#numero').inputmask({
-        mask: ['[9][9][9]9'],
-        keepStatic: true
-    });
-    $('[data-mask]').inputmask();
-
-
     $("#submit").submit(function(e){
         e.preventDefault();
         var data = $(this).serialize();

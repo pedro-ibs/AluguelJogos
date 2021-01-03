@@ -11,26 +11,9 @@ class Sistema_model extends CI_Model{
 
     public function get_categorias()
     {
-        $categoria = $this->db->get_where("Categoria", "id_pai = 0")->result();
+        $categoria = $this->db->get("Categoria")->result();
 
-        $rst = array();
-
-        foreach($categoria as $key => $item)
-        {
-            $subcategoria = $this->db->get_where("Categoria", "id_pai = $item->id")->result();
-
-            $rst2 = array();
-            foreach($subcategoria as  $value)
-            {
-                $query = $this->db->get_where("Categoria", "id_pai = $value->id")->result();
-
-                $rst2[] = array("id" => $value->id, "nome" => $value->nome, "filho" => $query);
-            }
-
-            $rst[] = array("id" => $item->id, "nome" => $item->nome, "filho" => $rst2);
-        }
-
-        return $rst;
+        return $categoria;
     }
 
     public function inseri_servico()
