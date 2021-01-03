@@ -52,7 +52,7 @@
 <!-- #END# Widgets -->
 <?php foreach($info as $item): ?>
 
-    <?= $item->nome ?>
+    <?= $item->id ?>
 
 <?php endforeach; ?>
 <!-- CPU Usage -->
