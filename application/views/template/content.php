@@ -5,55 +5,46 @@
     <?= $header ?>
 </head>
 
-<body class="theme-red">
-    <!-- Page Loader -->
-    <div class="page-loader-wrapper">
-        <div class="loader">
-            <div class="preloader">
-                <div class="spinner-layer pl-red">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
+<body class="layout-fixed">
+
+    <?= $navbar ?>
+
+    <div class="content-wrapper">
+        <?php if(isset($breadcrumb) AND $breadcrumb): ?>
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h1 class="m-0"><?= $breadcrumb->titulo ?></h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <?php foreach($breadcrumb->before as $item): ?>
+                                    <li class="breadcrumb-item"><a href="<?= base_url($item->link) ?>"><?= $item->nome ?></a></li>
+                                <?php endforeach; ?>
+                                <li class="breadcrumb-item active"><?= $breadcrumb->current ?></li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
-            <p>Please wait...</p>
-        </div>
-    </div>
-    <!-- #END# Page Loader -->
-    <!-- Overlay For Sidebars -->
-    <div class="overlay"></div>
-    <!-- #END# Overlay For Sidebars -->
-    <!-- Search Bar -->
-    <div class="search-bar">
-        <div class="search-icon">
-            <i class="material-icons">search</i>
-        </div>
-        <input type="text" placeholder="START TYPING...">
-        <div class="close-search">
-            <i class="material-icons">close</i>
-        </div>
-    </div>
-    <!-- #END# Search Bar -->
-    <!-- Top Bar -->
-    <?= $navbar ?>
-    <!-- #Top Bar -->
-    <section>
-        <!-- Left Sidebar -->
-        <?= $sidebar ?>
-        <!-- #END# Left Sidebar -->
-    </section>
+        <?php endif; ?>
 
-    <section class="content">
-        <div class="container-fluid">
+        <!-- Main content -->
+        <section class="content">
             <?= $content ?>
-        </div>
-    </section>
-
+        </section>
+        <!-- /.content -->
+    </div>
+    <footer class="main-footer">
+        <strong>Copyright &copy; 2020 <a href="https://adminlte.io">Nome do Site</a>.</strong> Todos os direitos reservados.
+    </footer>
     <?= $footer ?>
-    <?= isset($js) ? $js : "" ?>
+    <?php if(isset($javascript) && !empty($javascript)): ?>
+        <?php foreach($javascript as $js): ?>
+            <script src="<?= $js . "?v=" . time() ?>"></script>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </body>
 
 </html>
