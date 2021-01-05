@@ -11,23 +11,29 @@
                             <div class="card-header">
                                 <h4 class="card-title w-100">
                                 <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
-                                    Sub Categoria 1
+                                    Tipo de Produto
                                 </a>
                                 </h4>
                             </div>
                             <div id="collapseOne" class="collapse show" data-parent="#accordion1">
                                 <div class="card-body">
                                     <div class="form-group clearfix">
-                                        <div class="icheck-primary">
-                                            <input type="checkbox" id="checkboxPrimary1">
-                                            <label for="checkboxPrimary1">
-                                                Sub da Sub categoria 1
+                                        <div class="icheck-danger">
+                                            <input type="checkbox" id="venda">
+                                            <label for="venda">
+                                                Venda
                                             </label>
                                         </div>
-                                        <div class="icheck-primary">
-                                            <input type="checkbox" id="checkboxPrimary2">
-                                            <label for="checkboxPrimary2">
-                                                Sub da Sub categoria 1
+                                        <div class="icheck-danger">
+                                            <input type="checkbox" id="troca">
+                                            <label for="troca">
+                                                Troca
+                                            </label>
+                                        </div>
+                                        <div class="icheck-danger">
+                                            <input type="checkbox" id="aluguel">
+                                            <label for="aluguel">
+                                                Aluguel
                                             </label>
                                         </div>
                                     </div>
@@ -37,35 +43,7 @@
                     </div>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-6 col-sm-6 col-xs-12">
-                    <div id="accordion2">
-                        <div class="card card-secondary">
-                            <div class="card-header">
-                                <h4 class="card-title w-100">
-                                    <a class="d-block w-100" data-toggle="collapse" href="#collapseSecondary">
-                                        Sub Categoria 2
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseSecondary" class="collapse show" data-parent="#accordion2">
-                                <div class="card-body">
-                                    <div class="form-group clearfix">
-                                        <div class="icheck-primary">
-                                            <input type="checkbox" id="checkboxPrimary21">
-                                            <label for="checkboxPrimary21">
-                                                Sub da Sub categoria 1
-                                            </label>
-                                        </div>
-                                        <div class="icheck-primary">
-                                            <input type="checkbox" id="checkboxPrimary22">
-                                            <label for="checkboxPrimary22">
-                                                Sub da Sub categoria 1
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <button id="filtrar" type="button" class="btn btn-block btn-outline-danger">Filtrar</button>
                 </div>
             </div>
         </div>
@@ -75,15 +53,14 @@
                     <?php foreach($cards as $item): ?>
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-xs-12 pb-4">
                             <div class="card h-100">
-                                <div class="card-header">
-                                    <h3 class="card-title"><?= $item->titulo ?></h3>
-                                </div>
+                                <img src="<?= $item->imagem ? $item->imagem->img : "https://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_AnimalCrossingNewHorizons_image1600w.jpg" ?>" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <p class="text-justify"><?= $item->descricao ?></p>
+                                    <h3 class="card-title text-bold"><?= $item->jogo->titulo ?></h3>
+                                    <br/>
+                                    <p class="text-justify"><?= $item->jogo->descricao ?></p>
                                 </div>
                                 <div class="card-footer">
-                                    <br/>
-                                    <a href="<?= base_url("Home/detalhes/$item->id") ?>" class="btn btn-block btn-outline-primary">Ver Mais</a>
+                                    <a href="<?= base_url("Home/detalhes/".$item->jogo->id) ?>" class="btn btn-block btn-outline-danger">Ver Mais</a>
                                 </div>
                             </div>
                         </div>

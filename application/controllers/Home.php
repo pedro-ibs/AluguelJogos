@@ -40,7 +40,7 @@ class Home extends CI_Controller{
     {
         $this->data["cards"] = $this->m_home->get_cards($id);
         //Faz a parte das categorias.
-        $this->data["breadcrumb"] = (object)array("titulo" => "Lista de Produtos/Serviços", "before" => array((object) array("nome" => "Nome da Pagina Anterior", "link" => "Home")), "current" => "Nome da pagina atual");
+        $this->data["breadcrumb"] = (object)array("titulo" => "Lista de jogos", "before" => array((object) array("nome" => "Nome da Pagina Anterior", "link" => "Home")), "current" => "Nome da pagina atual");
 
         $this->data["content"] = $this->load->view("home/lista", $this->data, true);
         $this->load->view("template/content", $this->data);
@@ -50,7 +50,7 @@ class Home extends CI_Controller{
     {
         $this->data["info"] = $this->m_home->get_jogo_info($id);
 
-        $this->data["breadcrumb"] = (object)array("titulo" => "Detalhes de Produtos/Serviços", "before" => array((object)array("nome" => "Home", "link" => "Home"), (object)array("nome" => "Categoria dele", "link" => "Home/lista")), "current" => "Nome do produto");;
+        $this->data["breadcrumb"] = (object)array("titulo" => "Detalhes do jogo", "before" => array((object)array("nome" => "Home", "link" => "Home"), (object)array("nome" => "Categoria dele", "link" => "Home/lista")), "current" => "Nome do produto");;
 
         $data["javascript"] = [
             base_url("assets/js/home/detalhes.js")
@@ -65,5 +65,11 @@ class Home extends CI_Controller{
         $rst = $this->m_home->perguntar($pergunta);
         echo json_encode($rst, JSON_UNESCAPED_UNICODE);
     }
+
+    // public function favoritar()
+    // {
+    //     $rst = $this->m_home->favoritar();
+    //     echo json_encode($rst, JSON_UNESCAPED_UNICODE);
+    // }
 
 }

@@ -5,34 +5,52 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header bg-danger">
                                 <h3 class="card-title">Informações</h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-8 col-sm-12">
                                         <div class="col-12">
-                                            <img src="https://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_AnimalCrossingNewHorizons_image1600w.jpg" class="product-image" alt="Product Image" >
+                                            <img src="<?= $info->imagem[0]->img ?>" class="product-image" alt="Product Image" >
                                         </div>
                                         <div class="col-12 product-image-thumbs">
-                                            <div class="product-image-thumb active"><img src="https://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_AnimalCrossingNewHorizons_image1600w.jpg"  alt="Product Image"></div>
-                                            <div class="product-image-thumb" ><img src="https://s2.glbimg.com/5rK3_CrzgsEQIjTxZypq9YVv78M=/0x0:1200x675/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/J/6/BfbXamRiKY6TxLVysI2Q/switch-acnh-0220-direct-advanced-scrn-08-copy.0.jpg" alt="Product Image"></div>
-                                            <div class="product-image-thumb" ><img src="https://http2.mlstatic.com/D_NQ_NP_759312-MLB41133535419_032020-W.jpg" alt="Product Image"></div>
+                                            <?php foreach($info->imagem as $item): ?>
+                                                <div class="product-image-thumb active"><img src="<?= $item->img ?>"  alt="Product Image"></div>
+                                            <?php endforeach; ?>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-12">
-                                        <h3 class="my-3"><?= $info->titulo ?></h3>
                                         <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12 text-right">
-                                                <i class="fas fa-heart" style="color: Red"></i>
+                                            <div class="col-md-11 col-sm-12 col-xs-12">
+                                                <h3 class="my-3"><?= $info->titulo ?></h3>
                                                 <!-- <i class="far fa-heart"></i> -->
+                                            </div>
+                                            <div class="col-md-1 col-sm-12 col-xs-12">
+                                                <br/>
+                                                <span id="fav<?= $info->id ?>" class="text-right">
+                                                    <?php if(!empty($info->favorito) && $info->favorito->ativo == 1): ?>
+                                                        <i class="fas fa-heart float-right" onclick="favoritos('<?= $info->id ?>', 'preenchido')" data-tipo="preenchido" style="color: red" id="item<?= $info->id ?>"></i>
+                                                    <?php else: ?>
+                                                        <i class="far fa-heart float-right" onclick="favoritos('<?= $info->id ?>', 'vazio')" data-tipo="vazio" style="color: grey" id="item<?= $info->id ?>"></i>
+                                                    <?php endif; ?>
+                                                </span>
                                             </div>
                                         </div>
                                         <hr>
-
+                                        <h3 class="card-title">Categorias do Jogo</h3>
+                                        <br/>
+                                        <div class="row">
+                                            <?php foreach($info->categoria as $item): ?>
+                                                <div class="col-md-4 col-sm-4 ol-xs-12">
+                                                    <span class="badge bg-warning"><?= $item->nome ?></span>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <hr>
                                         <div class="mt-4">
                                             <h2 class="mb-0">
-                                            <?= $info->produto->preco ?>
+                                            <?= "R$ ".$info->produto->preco.",00" ?>
                                             </h2>
                                         </div>
 
@@ -43,17 +61,25 @@
                                         <div class="mt-4">
                                             <a href="" class="btn btn-warning btn-block btn-lg">
                                                 <i class="fas fa-handshake"></i>
-                                                <?= $info->produto->descricao ?>
+                                                <?= $info->tipo->nome ?>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row pt-5">
                                     <div class="col-md-12 col-sm-12 col-xs-12 pb-5">
-                                        <h3 class="card-title">Descrição</h3>
+                                        <h3 class="card-title">Descrição do Jogo</h3>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <?= $info->descricao ?>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 pb-5">
+                                        <h3 class="card-title">Descrição feita pelo vendedor</h3>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <?= $info->produto->descricao ?>
                                     </div>
                                 </div>
                                 <div class="row pt-5">
@@ -67,7 +93,7 @@
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" id="pergunta" placeholder="Digite aqui!">
                                                     <span class="input-group-append">
-                                                        <button type="button" id="perguntar" class="btn btn-primary">Perguntar!</button>
+                                                        <button type="button" id="perguntar" class="btn btn-danger">Perguntar!</button>
                                                     </span>
                                                 </div>
                                             </div>
