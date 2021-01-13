@@ -7,8 +7,6 @@ class Home extends CI_Controller{
     {
         parent:: __construct();
         $this->data = array();
-     
-        // $this->m_sistema->inseri_servico();
 
         $this->dados = $this->session->userdata("dados" . APPNAME);
         $this->data["dados"] = $this->dados;
