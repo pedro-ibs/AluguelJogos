@@ -49,10 +49,10 @@
             </div>
           </li>
           <li class="user-body">
-            <button type="button" class="btn btn-default btn-flat btn-block">Minhas Informações</button>
-            <button type="button" class="btn btn-default btn-flat btn-block">Meus Serviços</button>
+            <a href="<?= base_url("Usuario/perfil") ?>" class="btn btn-default btn-flat btn-block">Meu Perfil</a>
+            <!-- <button type="button" class="btn btn-default btn-flat btn-block">Meus Serviços</button>
             <button type="button" class="btn btn-default btn-flat btn-block">Lista de favoritos</button>
-            <button type="button" class="btn btn-default btn-flat btn-block">Serviços contratos</button>
+            <button type="button" class="btn btn-default btn-flat btn-block">Serviços contratos</button> -->
             <a href="<?= base_url("Usuario/logout/$local") ?>" class="btn btn-default btn-flat btn-block">Sair</a>
           </li>
         </ul>

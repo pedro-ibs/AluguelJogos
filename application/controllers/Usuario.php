@@ -53,6 +53,24 @@ class Usuario extends CI_Controller{
         $this->load->view("template/content", $this->data);
     }
 
+    public function perfil()
+    {
+        $this->session->set_userdata(array("local" => ""));
+        $this->data["breadcrumb"] = (object)array("titulo" => "Perfil", "before" => array((object)array("nome" => "Home", "link" => "Home")), "current" => "Perfil");
+
+        $this->data["info"] = $this->m_usuario->get_info_perfil();
+        // echo '<pre>';
+        // print_r($this->data["info"]);
+        // echo '</pre>';
+        // exit;
+        $this->data["javascript"] = [
+            base_url("assets/js/perfil/perfil.js")
+        ];
+
+        $this->data["content"] = $this->load->view("usuario/perfil", $this->data, true);
+        $this->load->view("template/content", $this->data);
+    }
+
     public function logout()
     {
         $dados = $this->session->userdata("dados" . APPNAME);
@@ -83,6 +101,6 @@ class Usuario extends CI_Controller{
             $rst->local = $this->session->userdata("local");
         }
         echo json_encode($rst, JSON_UNESCAPED_UNICODE);
-    }
+    }    
 
 }

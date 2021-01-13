@@ -6,7 +6,7 @@ class Usuario_model extends CI_Model{
     function __construct() 
     {
         parent::__construct();
-            
+        $this->dados = $this->session->userdata("dados" . APPNAME);
     }
 
     private $loginData = array(
@@ -22,6 +22,13 @@ class Usuario_model extends CI_Model{
     {
         $query = $this->db->get("Usuario")->result();
 
+        return $query;
+    }
+
+    public function get_info_perfil()
+    {
+        $query = $this->db->get_where("Usuario", "id = ".$this->dados->usuario_id)->row();
+        
         return $query;
     }
 
