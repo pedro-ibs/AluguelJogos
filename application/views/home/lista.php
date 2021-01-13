@@ -55,12 +55,19 @@
                             <div class="card h-100">
                                 <img src="<?= $item->imagem ? $item->imagem->img : "https://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_AnimalCrossingNewHorizons_image1600w.jpg" ?>" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h3 class="card-title text-bold"><?= $item->jogo->titulo ?></h3>
+                                    <h3 class="card-title text-bold"><?= $item->titulo ?></h3>
+                                    <span id="fav<?= $item->id ?>" class="text-right">
+                                        <?php if(!empty($item->favorito) && isset($item->favorito->ativo) && $item->favorito->ativo == 1): ?>
+                                            <i class="fas fa-heart float-right" onclick="favoritos('<?= $item->id ?>', 'preenchido')" data-tipo="preenchido" style="color: red" id="item<?= $item->id ?>"></i>
+                                        <?php else: ?>
+                                            <i class="far fa-heart float-right" onclick="favoritos('<?= $item->id ?>', 'vazio')" data-tipo="vazio" style="color: grey" id="item<?= $item->id ?>"></i>
+                                        <?php endif; ?>
+                                    </span>
                                     <br/>
-                                    <p class="text-justify"><?= $item->jogo->descricao ?></p>
+                                    <p class="text-justify"><?= $item->descricao_jogo ?></p>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="<?= base_url("Home/detalhes/".$item->jogo->id) ?>" class="btn btn-block btn-outline-danger">Ver Mais</a>
+                                    <a href="<?= base_url("Home/detalhes/".$item->id) ?>" class="btn btn-block btn-outline-danger">Ver Mais</a>
                                 </div>
                             </div>
                         </div>

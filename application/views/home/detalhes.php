@@ -29,7 +29,7 @@
                                             <div class="col-md-1 col-sm-12 col-xs-12">
                                                 <br/>
                                                 <span id="fav<?= $info->id ?>" class="text-right">
-                                                    <?php if(!empty($info->favorito) && $info->favorito->ativo == 1): ?>
+                                                    <?php if(!empty($info->favorito) && isset($info->favorito->ativo) && $info->favorito->ativo == 1): ?>
                                                         <i class="fas fa-heart float-right" onclick="favoritos('<?= $info->id ?>', 'preenchido')" data-tipo="preenchido" style="color: red" id="item<?= $info->id ?>"></i>
                                                     <?php else: ?>
                                                         <i class="far fa-heart float-right" onclick="favoritos('<?= $info->id ?>', 'vazio')" data-tipo="vazio" style="color: grey" id="item<?= $info->id ?>"></i>
@@ -50,7 +50,7 @@
                                         <hr>
                                         <div class="mt-4">
                                             <h2 class="mb-0">
-                                            <?= "R$ ".$info->produto->preco.",00" ?>
+                                            <?= "R$ ".$info->preco ?>
                                             </h2>
                                         </div>
 
@@ -71,7 +71,7 @@
                                         <h3 class="card-title">Descrição do Jogo</h3>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <?= $info->descricao ?>
+                                        <?= $info->descricao_jogo ?>
                                     </div>
                                 </div>
                                 <div class="row pt-5">
@@ -79,7 +79,7 @@
                                         <h3 class="card-title">Descrição feita pelo vendedor</h3>
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <?= $info->produto->descricao ?>
+                                        <?= $info->descricao ?>
                                     </div>
                                 </div>
                                 <div class="row pt-5">

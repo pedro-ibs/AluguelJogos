@@ -60,16 +60,10 @@ class Home extends CI_Controller{
         $this->load->view("template/content", $this->data);
     }
 
-    public function perguntar($pergunta)
+    public function favoritar()
     {
-        $rst = $this->m_home->perguntar($pergunta);
+        $rst = $this->m_home->favoritar();
         echo json_encode($rst, JSON_UNESCAPED_UNICODE);
     }
-
-    // public function favoritar()
-    // {
-    //     $rst = $this->m_home->favoritar();
-    //     echo json_encode($rst, JSON_UNESCAPED_UNICODE);
-    // }
 
 }

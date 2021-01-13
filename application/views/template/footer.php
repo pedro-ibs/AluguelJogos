@@ -45,6 +45,7 @@
 
 <script type="text/javascript">
     var BASE_URL = "<?= base_url() ?>";
+    var LOGGED = "<?= isset($dados) && $dados->logged == true ? 1 : 0 ?>";
 
     function showNotification(colorName, title, text, positionClass) {
       if (colorName === null || colorName === '') { colorName = 'info'; }
@@ -71,6 +72,57 @@
       }
 
       Command: toastr[colorName](text, title)
+    }
+
+    function favoritos(id, tipo)
+    {
+        if(LOGGED == 0)
+        {
+            Swal.fire({
+                title: 'Aviso',
+                text: "Para adicionar ao favoritos é necessário estar autentificado. Deseja ir para a pagina de Autentificação?",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: `Sim`,
+                cancelButtonText: `Não`,
+                }).then((result) => {
+                if (result.isConfirmed)
+                {
+                    window.location.href = BASE_URL+"Usuario/login";
+                }    
+            })
+        }
+        else
+        {
+          var data = {"id_produto": id, "tipo": tipo};
+          $.ajax({
+              type: "post",
+              url: BASE_URL+"Home/favoritar/",
+              dataType: "json",
+              data:  data,
+              success: function(data)
+              {
+                  if(data.rst === 1)
+                  {
+                      var html = '<i class="fas fa-heart float-right" onclick="favoritos('+id+', \'preenchido\')" data-tipo="preenchido" style="color: red" id="item'+id+'"></i>';
+                      $("#item"+id).remove();
+                      $("#fav"+id).append(html);
+                      showNotification("success", "Salvo", "Jogo adicionado ao favoritos", "toast-top-center");
+                  }
+                  else if(data.rst === 2)
+                  {
+                      var html = '<i class="far fa-heart float-right" onclick="favoritos('+id+', \'vazio\')" data-tipo="vazio" style="color: grey" id="item'+id+'"></i>';
+                      $("#item"+id).remove();
+                      $("#fav"+id).append(html);
+                      showNotification("success", "Salvo", "Jogo removido dos favoritos", "toast-top-center");
+                  }
+                  else if(data.rst === 0)
+                  {
+                      showNotification("error", "Problema ao salvar no favoritos", "Tente novamente mais tarde", "toast-top-center");
+                  }
+              }
+          });
+        }
     }
 
 </script>
