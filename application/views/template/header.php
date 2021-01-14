@@ -29,3 +29,7 @@
   <link rel="stylesheet" href="<?= base_url("assets/plugins/toastr/toastr.min.css") ?>">
   <!-- summernote -->
   <link rel="stylesheet" href="<?= base_url("assets/plugins/summernote/summernote-bs4.min.css") ?>">
+  <!-- dropzonejs -->
+  <link rel="stylesheet" href="<?= base_url("assets/plugins/dropzone/min/dropzone.min.css") ?>">
+  <!-- BS Stepper -->
+  <link rel="stylesheet" href="<?= base_url("assets/plugins/bs-stepper/css/bs-stepper.min.css") ?>">

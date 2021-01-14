@@ -28,9 +28,11 @@ class Produto extends CI_Controller{
     {
         $this->data["breadcrumb"] = (object)array("titulo" => "Formulario de Cadastro de Jogos", "before" => array((object)array("nome" => "Home", "link" => "Home")), "current" => "Formulario de Cadastrado de Jogos");;
 
-        // $data["javascript"] = [
-        //     base_url("assets/js/home/detalhes.js")
-        // ];
+        $this->data["categorias"] = $this->m_produto->get_categorias();
+
+        $this->data["javascript"] = [
+            base_url("assets/js/produto/form.js")
+        ];
 
         $this->data["content"] = $this->load->view("produto/form", $this->data, true);
         $this->load->view("template/content", $this->data);

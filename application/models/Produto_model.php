@@ -9,6 +9,11 @@ class Produto_model extends CI_Model{
         $this->dados = $this->session->userdata("dados" . APPNAME);
     }
 
-    
+    public function get_categorias()
+    {
+        $query = $this->db->get("Categoria")->result();
+
+        return $query;
+    }
 
 }

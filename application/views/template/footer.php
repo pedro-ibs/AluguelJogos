@@ -36,12 +36,17 @@
 <script src="<?= base_url("assets/plugins/inputmask/jquery.inputmask.min.js") ?>"></script>
 <!-- Select2 -->
 <script src="<?= base_url("assets/plugins/select2/js/select2.full.min.js") ?>"></script>
+<!-- BS-Stepper -->
+<script src="<?= base_url("assets/plugins/bs-stepper/js/bs-stepper.min.js") ?>"></script>
+<!-- dropzonejs -->
+<script src="<?= base_url("assets/plugins/dropzone/min/dropzone.min.js") ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url("assets/plugins/dist/js/adminlte.js") ?>"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?= base_url("assets/plugins/dist/js/demo.js") ?>"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?= base_url("assets/plugins/dist/js/pages/dashboard.js") ?>"></script>
+
 
 <script type="text/javascript">
     var BASE_URL = "<?= base_url() ?>";
