@@ -1,6 +1,4 @@
-<button class="open-button" onclick="openForm()">
-	<i class='fas fa-comment' style="font-size:48px;color:#dc3545" ></i>
-</button>
+<i class='fas fa-comment open-button' style="font-size:48px;color:#dc3545" onclick="openForm()"></i>
 
 <div class="chat-popup form-container container p-3" id="myForm">
 	<div class="row">
@@ -16,6 +14,7 @@
 			<div class="row mb-2 pb-3">
 				<div class="col-2"></div>
 				<div class="col-10 rounded border border-secondary">
+					<label>Você:</label>
 					<p class="text-justify text-chat">
 						Mas está em bom estado? é que na foto parece aranhado sabe. ai fiquei com duvida
 					</p>
@@ -24,6 +23,7 @@
 
 			<div class="row mb-2 pb-3">
 				<div class="col-10 rounded border border-secondary" >
+					<label>Ela(e):</label>
 					<p class="text-justify text-chat">
 						Tem esse aranhado na fita mas ele funciona perfeitamente, isso foi meu dog quem fez Oo. Para ele tudo é comida
 					</p>
@@ -33,8 +33,9 @@
 
 
 			<div class="row mb-2 pb-3">
-				<div class="col-2"></div>
+				<div class="col-2 bl-10"></div>
 				<div class="col-10 rounded border border-secondary">
+					<label>Você:</label>
 					<p class="text-justify text-chat">
 						A tudo bem vou fechar a compra então XD.
 					</p>
@@ -43,6 +44,7 @@
 
 			<div class="row mb-2 pb-3">
 				<div class="col-10 rounded border border-secondary" >
+					<label>Ela(e):</label>
 					<p class="text-justify text-chat">
 						blz vou separa o jogo para voce então....
 					</p>
@@ -52,6 +54,7 @@
 			
 			<div class="row mb-2 pb-3">
 				<div class="col-10 rounded border border-secondary" >
+					<label>Ela(e):</label>
 					<p class="text-justify text-chat">
 						Espero que goste, fez parte da minha infância...
 					</p>
