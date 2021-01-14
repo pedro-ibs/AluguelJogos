@@ -78,7 +78,7 @@ $db['default'] = array(
 	'hostname' => '',
 	'username' => '',
 	'password' => '',
-	'database' => APPPATH.'../assets/db/db.db',
+	'database' => APPPATH.'../assets/db/jogos.db',
 	'dbdriver' => 'sqlite3',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -94,25 +94,3 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-
-/*$db['default'] = array(
-	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',//Acesso a sua base de dados.
-	'password' => '',//Senha de acesso a sua base de dados.
-	'database' => '',//nome da sua base de dados
-	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);*/
