@@ -8,7 +8,7 @@
 <body class="layout-fixed">
 
     <?= $navbar ?>
-    <?= $chat ?>
+    <!-- Aqui era para ter aquele entrada do PHP do Chat -->
 
     <div class="content-wrapper">
         <?php if(isset($breadcrumb) AND $breadcrumb): ?>
