@@ -8,6 +8,7 @@
 <body class="layout-fixed">
 
     <?= $navbar ?>
+    <?= $chat ?>
 
     <div class="content-wrapper">
         <?php if(isset($breadcrumb) AND $breadcrumb): ?>
