@@ -1,0 +1,67 @@
+/*body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}*/
+
+/* Button used to open the chat form - fixed at the bottom of the page */
+.open-button {
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 42px;
+  right: 42px;
+  width: 42px;
+  z-index: 8;
+}
+
+
+/* The popup chat - hidden by default */
+.chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 350px;
+  padding: 10px;
+  background-color: white;
+  z-index: 9;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+  background: #f1f1f1;
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+    background-color: #dc3545;
+}
+
+.cancel{
+    width:  48px !important; 
+    height: 48px !important;
+}
+
+/* onde o chat aparece */
+.showChat{
+    height: 300px;
+    max-height: 300px;
+}
+
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}

@@ -29,3 +29,8 @@
   <link rel="stylesheet" href="<?= base_url("assets/plugins/toastr/toastr.min.css") ?>">
   <!-- summernote -->
   <link rel="stylesheet" href="<?= base_url("assets/plugins/summernote/summernote-bs4.min.css") ?>">
+
+
+  <!-- chat -->
+  <link rel="stylesheet" href="<?= base_url("assets/chat/chat.css") ?>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

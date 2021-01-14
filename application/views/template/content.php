@@ -8,6 +8,7 @@
 <body class="layout-fixed">
 
     <?= $navbar ?>
+    <?= $chat ?>
 
     <div class="content-wrapper">
         <?php if(isset($breadcrumb) AND $breadcrumb): ?>
@@ -42,6 +43,7 @@
             <script src="<?= $js . "?v=" . time() ?>"></script>
         <?php endforeach; ?>
     <?php endif; ?>
+
 </body>
 
 </html>
