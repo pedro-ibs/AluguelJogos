@@ -51,7 +51,10 @@ class Home_model extends CI_Model{
         $this->db->order_by("principal", "desc");
         $query->imagem = $this->db->get_where("Imagem", "id_produto = ".$query->id)->result();
 
-        $query->favorito = $this->db->get_where("Favorito", "id_produto = '$query->id' AND id_usuario = '".$this->dados->usuario_id."'")->row();
+        if($this->dados)
+            $query->favorito = $this->db->get_where("Favorito", "id_produto = '$query->id' AND id_usuario = '".$this->dados->usuario_id."'")->row();
+        else
+            $query->favorito = array();
         $query->perguntas = $this->db->get_where("Pergunta", "id_produto = '$query->id'")->result();
 
         return $query;
