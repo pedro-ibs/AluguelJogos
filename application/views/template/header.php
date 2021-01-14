@@ -34,3 +34,6 @@
   <!-- chat -->
   <link rel="stylesheet" href="<?= base_url("assets/chat/chat.css") ?>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Tentativa de Colocar Css Geral no Site -->
+  <link rel="stylesheet" href="<?= base_url("assets/CSS/estilo.css")?>">
