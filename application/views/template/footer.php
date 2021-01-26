@@ -52,11 +52,12 @@
     var BASE_URL = "<?= base_url() ?>";
     var LOGGED = "<?= isset($dados) && $dados->logged == true ? 1 : 0 ?>";
 
-    function showNotification(colorName, title, text, positionClass) {
+    function showNotification(colorName, title, text, positionClass, temp = null) {
       if (colorName === null || colorName === '') { colorName = 'info'; }
       if (text === null || text === '') { text = 'Deixe sua mensagem aqui'; }
       if (title === null || title === '') { title = 'Titulo'; }
       if (positionClass === null || positionClass === '') { positionClass = 'toast-top-center'; }
+      if (temp === null || temp === '') { temp = "5000"; }
 
       toastr.options = {
         "closeButton": false,
@@ -68,8 +69,8 @@
         "onclick": null,
         "showDuration": "500",
         "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
+        "timeOut": temp,
+        "extendedTimeOut": "5000",
         "showEasing": "swing",
         "hideEasing": "linear",
         "showMethod": "fadeIn",

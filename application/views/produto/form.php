@@ -1,7 +1,7 @@
 <div class="container">
     <div class="card card-danger card-outline">
-        <div class="card-body box-profile">
-            <form id='submit'>
+        <form id='submit'>
+            <div class="card-body box-profile">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="row">
@@ -15,12 +15,12 @@
                                 <label for="nome">Categorias: </label><br/> 
                                 <?php foreach($categorias as $item): ?>
                                     <div class="custom-control custom-checkbox d-inline">
-                                        <input class="custom-control-input custom-control-input-danger custom-control-input-outline" name="categoria" type="checkbox" id="categorias<?= $item->id ?>">
+                                        <input class="custom-control-input custom-control-input-danger custom-control-input-outline" name="categoria[]" type="checkbox" value="<?= $item->id ?>" id="categorias<?= $item->id ?>">
                                         <label for="categorias<?= $item->id ?>" class="custom-control-label"><?= $item->nome ?></label>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
-                            <div class="col-md-6 col-sm-12 col-xs-12 mt-3">
+                            <div class="col-md-4 col-sm-4 col-xs-12 mt-3">
                                 <div class="form-group">
                                     <label>Tipo de Anúncio</label>
                                     <select class="form-control" name="tipo">
@@ -30,7 +30,17 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12 col-xs-12 mt-3">
+                            <div class="col-md-4 col-sm-4 col-xs-12 mt-3">
+                                <div class="form-group">
+                                    <label>Marca</label>
+                                    <select class="form-control" name="marca">
+                                        <?php foreach($marca as $item): ?>
+                                            <option value="<?= $item->id ?>"><?= $item->nome ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12 mt-3">
                                 <div class="form-group">
                                     <label>Preço:</label>
                                     <input type="text" class="form-control" id="preco" name="preco" placeholder="Preço">
@@ -95,7 +105,21 @@
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="text-left">
+                            <a href="<?= base_url($local); ?>" class="btn btn-danger">Voltar</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>

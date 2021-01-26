@@ -29,6 +29,7 @@ class Produto extends CI_Controller{
         $this->data["breadcrumb"] = (object)array("titulo" => "Formulario de Cadastro de Jogos", "before" => array((object)array("nome" => "Home", "link" => "Home")), "current" => "Formulario de Cadastrado de Jogos");;
 
         $this->data["categorias"] = $this->m_produto->get_categorias();
+        $this->data["marca"] = $this->m_produto->get_marcas();
 
         $this->data["javascript"] = [
             base_url("assets/js/produto/form.js")
@@ -36,6 +37,31 @@ class Produto extends CI_Controller{
 
         $this->data["content"] = $this->load->view("produto/form", $this->data, true);
         $this->load->view("template/content", $this->data);
+    }
+
+    public function cadastra()
+    {
+        $rst = $this->m_produto->cadastra();
+        echo json_encode($rst, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function set_files()
+    {
+        $arquivo = array(
+            "name" => $_FILES["file"]["name"],
+            "type" => $_FILES["file"]["type"],
+            "path" => $_FILES["file"]["tmp_name"],
+            "size" => $_FILES["file"]["size"],
+            "erro" => $_FILES["file"]["error"]
+        );
+
+        $files = $this->session->userdata("files". APPNAME);
+        
+        if(!$files)
+            $files = array();
+
+        $files[] = $arquivo;
+        $this->session->set_userdata(array("files". APPNAME => $files));
     }
 
 }
