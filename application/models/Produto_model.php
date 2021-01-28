@@ -25,7 +25,6 @@ class Produto_model extends CI_Model{
 
     public function cadastra()
     {
-        // $this->session->set_userdata("files".APPNAME, "");
         $rst = (object)array("rst" => true, "msg" => "");
         $data = (object)$this->input->post();
         // exit;
@@ -61,45 +60,35 @@ class Produto_model extends CI_Model{
     public function set_img ($id)
     {
         $files = $this->session->userdata("files".APPNAME);
+      
         $this->session->set_userdata("files".APPNAME, "");
-        $config["upload_path"] =  APPPATH.'/../anexos';
-        $config["allowed_types"] = 'gif|jpg|png';
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
+
         for($count = 0; $count < count($files); $count++)
         {
-            $_FILES["arquivos"]["name"] = $files[$count]["name"];
-            $_FILES["arquivos"]["type"] = $files[$count]["type"];
-            $_FILES["arquivos"]["tmp_name"] = $files[$count]["path"];
-            $_FILES["arquivos"]["error"] = $files[$count]["erro"];
-            $_FILES["arquivos"]["size"] = $files[$count]["size"];
-            echo '<pre>';
-            print_r($_FILES);
-            echo '</pre>';
-            if($this->upload->do_upload('arquivos'))
-            {
-                $data = $this->upload->data();
+            if($count == 0)
+                $this->db->set("principal", 1);
+            
+            $this->db->set("id_produto", $id);
+            $this->db->set("ativo", 1);
+            $this->db->set("nome", $files[$count]["name"]);
+            $this->db->set("tipo", $files[$count]["type"]);
+            $this->db->set("tamanho", $files[$count]["size"]);
+            $this->db->set("img", base64_encode(file_get_contents($files[$count]["path"])));
 
-                if($count == 0)
-                    $this->db->set("principal", 1);
-                
-                $this->db->set("id_produto", $id);
-                $this->db->set("ativo", 1);
-                $this->db->set("nome", $data["orig_name"]);
-                $this->db->set("tipo", $data["file_type"]);
-                $this->db->set("tamanho", $data["file_size"]);
-                $this->db->set("img", file_get_contents($data["full_path"]));
-
-                $this->db->insert("Imagem");
-            }
-            else
-            {
-                echo '<pre>';
-                print_r($this->upload->display_errors());
-                echo '</pre>';
-                exit;
-            }
+            $this->db->insert("Imagem");
         }
     }
 
+    public function get_imga()
+    {
+        $rst = $this->db->get_where("Imagem", "id = 18")->row();
+        // $rst->img = base64_encode($rst->img);
+        echo '<pre>';
+        print_r($rst->img);
+        echo '</pre>';
+        echo '<pre>';
+        echo "<img src='data:image/png;base64,".$rst->img."'>";
+        echo '</pre>';
+        exit;
+    }
 }

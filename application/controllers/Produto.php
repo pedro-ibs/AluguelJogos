@@ -47,10 +47,16 @@ class Produto extends CI_Controller{
 
     public function set_files()
     {
+
+        move_uploaded_file($_FILES["file"]["tmp_name"], APPPATH."..\assets\uploads"."\\".$_FILES["file"]["name"]);
+
+        $path = APPPATH."..\assets\uploads"."\\".$_FILES["file"]["name"];
+
         $arquivo = array(
             "name" => $_FILES["file"]["name"],
             "type" => $_FILES["file"]["type"],
-            "path" => $_FILES["file"]["tmp_name"],
+            "path" => $path,
+            "tmp_name" => $_FILES["file"]["tmp_name"],
             "size" => $_FILES["file"]["size"],
             "erro" => $_FILES["file"]["error"]
         );
@@ -62,6 +68,11 @@ class Produto extends CI_Controller{
 
         $files[] = $arquivo;
         $this->session->set_userdata(array("files". APPNAME => $files));
+    }
+
+    public function get_img()
+    {
+        $this->m_produto->get_imga();
     }
 
 }
