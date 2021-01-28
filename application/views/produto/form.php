@@ -24,9 +24,9 @@
                                 <div class="form-group">
                                     <label>Tipo de Anúncio</label>
                                     <select class="form-control" name="tipo">
-                                        <option value="1" <?= set_select("tipo", "1", $jogo->tipo == 1 ? true : false ) ?>>Venda</option>
-                                        <option value="2" <?= set_select("tipo", "2", $jogo->tipo == 2 ? true : false ) ?>>Aluguel</option>
-                                        <option value="3" <?= set_select("tipo", "3", $jogo->tipo == 3 ? true : false ) ?>>Troca</option>
+                                        <option value="1" <?= set_select("tipo", "1", isset($jogo->id_marca) && $jogo->tipo == 1 ? true : false ) ?>>Venda</option>
+                                        <option value="2" <?= set_select("tipo", "2", isset($jogo->id_marca) && $jogo->tipo == 2 ? true : false ) ?>>Aluguel</option>
+                                        <option value="3" <?= set_select("tipo", "3", isset($jogo->id_marca) && $jogo->tipo == 3 ? true : false ) ?>>Troca</option>
                                     </select>
                                 </div>
                             </div>
@@ -35,15 +35,22 @@
                                     <label>Marca</label>
                                     <select class="form-control" name="marca">
                                         <?php foreach($marca as $item): ?>
-                                            <option value="<?= $item->id ?>" <?= set_select("marca", $item->id, $jogo->id_marca == $item->id ? true : false ) ?>><?= $item->nome ?></option>
+                                            <option value="<?= $item->id ?>" <?= set_select("marca", $item->id, isset($jogo->id_marca) && $jogo->id_marca == $item->id ? true : false ) ?>><?= $item->nome ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-4 col-xs-12 mt-3">
+                            <div class="col-md-2 col-sm-2 col-xs-12 mt-3">
                                 <div class="form-group">
                                     <label>Preço:</label>
                                     <input type="text" class="form-control" value="<?= isset($jogo) && $jogo->preco ? $jogo->preco : "" ?>" id="preco" name="preco" placeholder="Preço">
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12 mt-3">
+                                <label>Status do Jogo:</label>
+                                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                    <input type="checkbox" class="custom-control-input" name="status" id="status" <?= isset($jogo->status) && $jogo->status == 0 ? "" : "checked=''" ?>>
+                                    <label class="custom-control-label" for="status">Ativo</label>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -112,9 +119,9 @@
                                             <div class="form-group">
                                                 <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
                                                     <input type="checkbox" class="custom-control-input principal" data-id="<?= $item->id ?>" id="principal<?=$item->id ?>" <?= $item->principal == 1 ? "checked=''" : "" ?>>
-                                                    <label class="custom-control-label" for="principal<?= $item->id ?>">Principal</label>&nbsp;
-                                                    <button type="button" class="btn btn-outline-danger excluir" data-id="<?= $item->id ?>"><i class="fas fa-trash"></i></button>
+                                                    <label class="custom-control-label" for="principal<?= $item->id ?>">Principal</label>
                                                 </div>
+                                                <button type="button" class="btn btn-outline-danger excluir" data-id="<?= $item->id ?>"><i class="fas fa-trash"></i></button>
                                             </div>
                                         </div>
                                     </div>

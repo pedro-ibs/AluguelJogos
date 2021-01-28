@@ -52,13 +52,21 @@ class Produto_model extends CI_Model{
         $rst = (object)array("rst" => false, "msg" => "");
         $data = (object)$this->input->post();
 
+        echo '<pre>';
+        print_r($data);
+        echo '</pre>';
+        exit;
+
         $this->db->set("titulo", $data->nome);
         $this->db->set("descricao_jogo", $data->descricao_jogo);
         $this->db->set("descricao", $data->descricao_anuncio);
         $this->db->set("id_marca", $data->marca);
         $this->db->set("preco", $data->preco);
         $this->db->set("tipo", $data->tipo);
-        $this->db->set("status", 1);
+        if(isset($data->status) && $data->status == "on")
+            $this->db->set("status", 1);
+        else
+            $this->db->set("status", 0);
         $this->db->set("id_usuario", $this->dados->usuario_id);
 
         if($data->id_produto)
