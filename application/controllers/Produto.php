@@ -24,13 +24,15 @@ class Produto extends CI_Controller{
         $this->data["footer"] = $this->load->view("template/footer", $this->data, true);
     }
 
-    public function jogo()
+    public function jogo($id = null)
     {
         $this->data["breadcrumb"] = (object)array("titulo" => "Formulario de Cadastro de Jogos", "before" => array((object)array("nome" => "Home", "link" => "Home")), "current" => "Formulario de Cadastrado de Jogos");;
 
         $this->data["categorias"] = $this->m_produto->get_categorias();
         $this->data["marca"] = $this->m_produto->get_marcas();
-
+        if($id)
+            $this->data["jogo"] = $this->m_produto->get_jogo_info($id);
+        
         $this->data["javascript"] = [
             base_url("assets/js/produto/form.js")
         ];
@@ -42,6 +44,18 @@ class Produto extends CI_Controller{
     public function cadastra()
     {
         $rst = $this->m_produto->cadastra();
+        echo json_encode($rst, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function definir_principal($checked, $id)
+    {
+        $rst = $this->m_produto->definir_principal($checked, $id);
+        echo json_encode($rst, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function excluir($id)
+    {
+        $rst = $this->m_produto->excluir($id);
         echo json_encode($rst, JSON_UNESCAPED_UNICODE);
     }
 

@@ -44,10 +44,9 @@ $(document).ready(function(){
     };
     // DropzoneJS Demo Code End
 
-
-    // $("#teste_submit").on("click", function(){
-    //     myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
-    // });
+    $("input[data-bootstrap-switch]").each(function(){
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
 
     $("#submit").submit(function(e){
         e.preventDefault();
@@ -87,25 +86,21 @@ $(document).ready(function(){
                     data: data,
                     success: function(data)
                     {
-                        if(data.rst === 1)
-                        {
-                            window.location.href = BASE_URL+"Home";
-                        }
-                        else if(data.rst === 2)
+                        if(data.rst === true)
                         {
                             Swal.fire({
-                                title: 'Erro',
+                                title: 'Sucesso',
                                 text: data.msg,
-                                icon: 'info',
+                                icon: 'success',
                                 confirmButtonText: `Ok`,
                                 }).then((result) => {
                                 if (result.isConfirmed)
-                                    window.location.href = BASE_URL+"Usuario/login";
+                                    window.location.href = BASE_URL+"Produto/jogo/"+data.id_jogo;
                             })
                         }
-                        else if(data.rst === 0)
+                        else if(data.rst === false)
                         {
-                            showNotification("warning", "Erro ao cadastrar", data.msg, "toast-top-center");
+                            showNotification("warning", "Erro", data.msg, "toast-top-center", "15000");
                         }
                     }
                 });
@@ -113,4 +108,62 @@ $(document).ready(function(){
             }, 2000);
         }
     });
+
+    $(".principal").on("click", function(){
+        var checked = this.checked == true ? 1 : 0;
+        var id = this.dataset.id;
+        $.ajax({
+            type: "post",
+            url: BASE_URL+"Produto/definir_principal/"+checked+"/"+id,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            success: function(data)
+            {
+                if(data == true)
+                {
+                    $(".principal").attr("checked", false);
+                    $("#principal"+id).attr("checked", true);
+                    showNotification("success", "Sucesso", "Configuração da imagem atualizada", "toast-top-center", "10000");
+                }
+                else
+                {
+                    showNotification("error", "Erro", "Problema ao atualizar os dados de configuração da imagem.", "toast-top-center", "10000");
+                }
+            }
+        });        
+    });
+
+    $(".excluir").on("click", function(e){
+        e.preventDefault();
+        var id = this.dataset.id;
+        $.ajax({
+            type: "post",
+            url: BASE_URL+"Produto/excluir/"+id,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            success: function(data)
+            {
+                if(data.rst == true)
+                {
+                    Swal.fire({
+                        title: 'Sucesso',
+                        text: "Imagem Excluida com sucesso",
+                        icon: 'success',
+                        confirmButtonText: `Ok`,
+                        }).then((result) => {
+                        if (result.isConfirmed)
+                            window.location.href = BASE_URL+"Produto/jogo/"+data.id;
+                    })
+                }
+                else
+                {
+                    showNotification("error", "Erro", "Não foi possivel realizar a exclusão da imagem, tente novamente mais tarde.", "toast-top-center", "10000");
+                }
+            }
+        }); 
+    })
 });
