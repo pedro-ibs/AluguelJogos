@@ -52,11 +52,6 @@ class Produto_model extends CI_Model{
         $rst = (object)array("rst" => false, "msg" => "");
         $data = (object)$this->input->post();
 
-        echo '<pre>';
-        print_r($data);
-        echo '</pre>';
-        exit;
-
         $this->db->set("titulo", $data->nome);
         $this->db->set("descricao_jogo", $data->descricao_jogo);
         $this->db->set("descricao", $data->descricao_anuncio);
