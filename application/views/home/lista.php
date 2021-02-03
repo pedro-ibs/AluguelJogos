@@ -53,7 +53,7 @@
                     <?php foreach($cards as $item): ?>
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-xs-12 pb-4">
                             <div class="card h-100">
-                                <img src="<?= $item->imagem ? $item->imagem->img : "https://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_AnimalCrossingNewHorizons_image1600w.jpg" ?>" class="card-img-top" alt="...">
+                                <img src="<?= $item->imagem ? "data:".$item->imagem->tipo.";base64,".$item->imagem->img : "https://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_AnimalCrossingNewHorizons_image1600w.jpg" ?>" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h3 class="card-title text-bold"><?= $item->titulo ?></h3>
                                     <span id="fav<?= $item->id ?>" class="text-right">

@@ -114,7 +114,7 @@
                             <div class="row">
                                 <?php foreach($jogo->img as $item): ?>
                                     <div class="col-md-3 col-sm-3 col-xs-12 m-3">
-                                        <img src="data:<?= $item->tipo ?>;base64,<?= $item->img ?>" class="img-fluid" style="max-height: 200px;"/>
+                                        <div class="text-center"><img src="data:<?= $item->tipo ?>;base64,<?= $item->img ?>" class="img-fluid" style="max-height: 200px;"/></div>
                                         <div class="text-center mt-3">
                                             <div class="form-group">
                                                 <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">

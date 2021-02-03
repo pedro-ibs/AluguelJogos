@@ -105,4 +105,48 @@ class Home_model extends CI_Model{
         return $rst;
     }
 
+    public function cadastrar_pergunta()
+    {
+        $data = (object)$this->input->post();
+        $rst = (object)array("rst" => false, "msg" => "", "pergunta" => "");
+
+        if($this->verifica_seguranca($data->pergunta))
+        {
+            $rst->msg = "Palavra utilizada para o acesso é proibida!";
+
+            return $rst;
+        }
+
+        $this->db->set("pergunta", $data->pergunta);
+        $this->db->set("data_inclusao", "date('now')", false);
+        $this->db->set("id_produto", $data->id_jogo);
+        $this->db->set("id_usuario", $this->dados->usuario_id);
+
+        if($this->db->insert("Pergunta"))
+        {
+            $rst->rst = true;
+            $rst->msg = "Pergunta registrada com sucesso, quando houver uma resposta, você será notificado!";
+        }
+        else
+        {
+            $rst->msg = "Erro ao registrar a pergunta, tente novamente mais tarde.";
+        }
+
+        return $rst;
+    }
+
+    private function verifica_seguranca($dado)
+    {
+        $palavras = palavra_proibidas();
+        foreach($palavras as $item)
+        {
+            $pattern = '/' . $item . '/';
+
+            if(preg_match($pattern, strtolower($dado)) > 0)
+                return true;
+        }
+
+        return false;
+    }
+
 }

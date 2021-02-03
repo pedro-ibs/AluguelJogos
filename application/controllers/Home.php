@@ -47,10 +47,13 @@ class Home extends CI_Controller{
     public function detalhes($id)
     {
         $this->data["info"] = $this->m_home->get_jogo_info($id);
-
+        // echo '<pre>';
+        // print_r($this->data["info"]);
+        // echo '</pre>';
+        // exit;
         $this->data["breadcrumb"] = (object)array("titulo" => "Detalhes do jogo", "before" => array((object)array("nome" => "Home", "link" => "Home"), (object)array("nome" => "Categoria dele", "link" => "Home/lista")), "current" => "Nome do produto");;
 
-        $data["javascript"] = [
+        $this->data["javascript"] = [
             base_url("assets/js/home/detalhes.js")
         ];
 
@@ -62,6 +65,12 @@ class Home extends CI_Controller{
     {
         $rst = $this->m_home->favoritar();
         echo json_encode($rst, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function cadastrar_pergunta()
+    {
+        $rst = $this->m_home->cadastrar_pergunta();
+        echo  json_encode($rst, JSON_UNESCAPED_UNICODE);
     }
 
 }

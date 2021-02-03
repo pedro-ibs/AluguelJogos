@@ -22,7 +22,7 @@
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label for="senha">Senha</label>
+                                    <label for="senha">Senha</label> <small>(Necessário no minimo conter 8 digitos e no minimo 1 numero)</small>
                                     <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha">
                                 </div>
                             </div>

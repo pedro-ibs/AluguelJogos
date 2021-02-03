@@ -223,17 +223,4 @@ class Produto_model extends CI_Model{
         else
             return (object)array("rst" => false);
     }
-
-    public function get_imga()
-    {
-        $rst = $this->db->get_where("Imagem", "id = 19")->row();
-        // $rst->img = base64_encode($rst->img);
-        echo '<pre>';
-        print_r($rst->img);
-        echo '</pre>';
-        echo '<pre>';
-        echo "<img src='data:image/png;base64,".$rst->img."'>";
-        echo '</pre>';
-        exit;
-    }
 }

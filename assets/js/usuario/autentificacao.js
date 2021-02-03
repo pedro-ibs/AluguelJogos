@@ -9,7 +9,7 @@ $(document).ready(function(){
         var email = $("#email").val();
         var senha = $("#senha").val();
         
-        if(email.search("@") > 0 && email.search(".com") > 0)
+        if(email.search("@") > 0)
         {
             if(senha.length >= 8 && regex.test(senha))
             {

@@ -76,6 +76,21 @@ class Usuario_model extends CI_Model{
         $data = (object)$this->input->post();
         $rst = (object)array("rst" => 0, "msg" => "");
 
+        if($this->verifica_seguranca($data->email))
+        {
+            $rst->rst = false;
+            $rst->msg = "Palavra utilizada para o acesso é proibida!";
+
+            return $rst;
+        }
+        if($this->verifica_seguranca($data->senha))
+        {
+            $rst->rst = false;
+            $rst->msg = "Palavra utilizada para o acesso é proibida!";
+
+            return $rst;
+        }
+
         if($this->verifica_email(strtolower($data->email)) && (!isset($data->id_usuario) || isset($data->id_usuario) && empty($data->id_usuario)))
         {
             $this->db->set("nome", $data->nome);
