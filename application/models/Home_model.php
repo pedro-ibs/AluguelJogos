@@ -36,6 +36,40 @@ class Home_model extends CI_Model{
         return $produto;
     }
 
+    public function get_jogos_aleatorio()
+    {
+        $jogos = $this->db->get_where("Produto")->result();
+
+        shuffle($jogos);
+
+        $cards = array();
+        for($i=0;$i<6;$i++)
+        {
+            if($this->dados)
+                $jogos[$i]->favorito = $this->db->get_where("Favorito", "id_produto = '".$jogos[$i]->id."' AND id_usuario = '".$this->dados->usuario_id."'")->row();
+            else
+                $jogos[$i]->favorito = (object)array();
+
+            $jogos[$i]->imagem = $this->db->get_where("Imagem", "id_produto = ".$jogos[$i]->id." AND principal = 1")->row();
+
+            $this->db->select("id_categoria");
+            $jogos[$i]->id_categoria = $this->db->get_where("Jogo_categoria", "id_produto = ".$jogos[$i]->id)->row()->id_categoria;
+
+            $jogos[$i]->categoria = $this->db->get_where("Categoria", "id = ".$jogos[$i]->id_categoria."")->row();
+
+            $card[] = $jogos[$i];
+        }
+
+        return $card;
+    }
+
+    public function categoria_by_nome($categoria)
+    {
+        $query = $this->db->get_where("Categoria", "nome = '$categoria'")->row();
+
+        return $query;
+    }
+
     public function get_jogo_info($id)
     {
         $query = $this->db->get_where("Produto", "id = '$id'")->row();

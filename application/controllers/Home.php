@@ -30,6 +30,8 @@ class Home extends CI_Controller{
 
     public function index()
     {
+        $this->data["cards"] = $this->m_home->get_jogos_aleatorio();
+
         $this->data["content"] = $this->load->view("home/home", $this->data, true);
         $this->load->view("template/content", $this->data);
     }
@@ -37,21 +39,20 @@ class Home extends CI_Controller{
     public function lista($categoria = null, $id = null)
     {
         $this->data["cards"] = $this->m_home->get_cards($id);
+        $this->data["categoria"] = $categoria;
         //Faz a parte das categorias.
-        $this->data["breadcrumb"] = (object)array("titulo" => "Lista de jogos", "before" => array((object) array("nome" => "Nome da Pagina Anterior", "link" => "Home")), "current" => "Nome da pagina atual");
+        $this->data["breadcrumb"] = (object)array("titulo" => "Lista de jogos", "before" => array((object) array("nome" => "Home", "link" => "Home")), "current" => ucfirst($categoria));
 
         $this->data["content"] = $this->load->view("home/lista", $this->data, true);
         $this->load->view("template/content", $this->data);
     }
 
-    public function detalhes($id)
+    public function detalhes($categoria, $id)
     {
+        $categoria = urldecode($categoria);
         $this->data["info"] = $this->m_home->get_jogo_info($id);
-        // echo '<pre>';
-        // print_r($this->data["info"]);
-        // echo '</pre>';
-        // exit;
-        $this->data["breadcrumb"] = (object)array("titulo" => "Detalhes do jogo", "before" => array((object)array("nome" => "Home", "link" => "Home"), (object)array("nome" => "Categoria dele", "link" => "Home/lista")), "current" => "Nome do produto");;
+        $id_categoria = $this->m_home->categoria_by_nome($categoria);
+        $this->data["breadcrumb"] = (object)array("titulo" => "Detalhes do jogo", "before" => array((object)array("nome" => "Home", "link" => "Home"), (object)array("nome" => ucfirst($categoria), "link" => "Home/lista/$categoria/$id_categoria->id")), "current" => $this->data["info"]->titulo);
 
         $this->data["javascript"] = [
             base_url("assets/js/home/detalhes.js")

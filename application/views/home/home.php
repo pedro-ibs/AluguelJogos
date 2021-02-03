@@ -37,92 +37,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12 co-xs-12">
-                    <h3 class="text-title">Com Altas Avaliações</h3>
-                </div> 
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 pb-4">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h3 class="card-title">Nome do Jogo</h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </div>
-                        <div class="card-footer">
-                            <br/>
-                            <a href="#" class="btn btn-block btn-outline-primary">Ver Mais</a>
+                    <h3 class="text-title">Alguns Jogos cadastrados!</h3>
+                </div>
+                <?php foreach($cards as $item): ?>
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-xs-12 pb-4">
+                        <div class="card h-100">
+                            <img src="<?= $item->imagem ? "data:".$item->imagem->tipo.";base64,".$item->imagem->img : "https://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_AnimalCrossingNewHorizons_image1600w.jpg" ?>" class="card-img-top" alt="..." style="max-height: 180px;">
+                            <div class="card-body">
+                                <h3 class="card-title text-bold"><?= $item->titulo ?></h3>
+                                <span id="fav<?= $item->id ?>" class="text-right">
+                                    <?php if(!empty($item->favorito) && isset($item->favorito->ativo) && $item->favorito->ativo == 1): ?>
+                                        <i class="fas fa-heart float-right" onclick="favoritos('<?= $item->id ?>', 'preenchido')" data-tipo="preenchido" style="color: red" id="item<?= $item->id ?>"></i>
+                                    <?php else: ?>
+                                        <i class="far fa-heart float-right" onclick="favoritos('<?= $item->id ?>', 'vazio')" data-tipo="vazio" style="color: grey" id="item<?= $item->id ?>"></i>
+                                    <?php endif; ?>
+                                </span>
+                                <br/>
+                                <p class="text-justify"><?= $item->descricao_jogo ?></p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="<?= base_url("Home/detalhes/".$item->categoria->nome."/".$item->id) ?>" class="btn btn-block btn-outline-danger">Ver Mais</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 pb-4">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h3 class="card-title">Nome do Jogo</h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </div>
-                        <div class="card-footer">
-                            <br/>
-                            <a href="#" class="btn btn-block btn-outline-primary">Ver Mais</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 pb-4">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h3 class="card-title">Nome do Jogo</h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </div>
-                        <div class="card-footer">
-                            <br/>
-                            <a href="#" class="btn btn-block btn-outline-primary">Ver Mais</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 pb-4">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h3 class="card-title">Nome do Jogo</h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </div>
-                        <div class="card-footer">
-                            <br/>
-                            <a href="#" class="btn btn-block btn-outline-primary">Ver Mais</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 pb-4">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h3 class="card-title">Nome do Jogo</h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </div>
-                        <div class="card-footer">
-                            <br/>
-                            <a href="#" class="btn btn-block btn-outline-primary">Ver Mais</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 pb-4">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h3 class="card-title">Nome do Jogo</h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </div>
-                        <div class="card-footer">
-                            <br/>
-                            <a href="#" class="btn btn-block btn-outline-primary">Ver Mais</a>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>

@@ -67,7 +67,7 @@
                                     <p class="text-justify"><?= $item->descricao_jogo ?></p>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="<?= base_url("Home/detalhes/".$item->id) ?>" class="btn btn-block btn-outline-danger">Ver Mais</a>
+                                    <a href="<?= base_url("Home/detalhes/".$categoria."/".$item->id) ?>" class="btn btn-block btn-outline-danger">Ver Mais</a>
                                 </div>
                             </div>
                         </div>
