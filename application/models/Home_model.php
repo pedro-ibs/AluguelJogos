@@ -10,10 +10,9 @@ class Home_model extends CI_Model{
     }
 
     /**
-     * Realiza a consulta de todas as subcategorias que estão dentro da categoria, com excecão do subcategoria que já está sendo acessada.
+     * Pega todos os dados necessários para montar o card da lista.
      * @access public
-     * @param  string   $categoria   Nome da categoria.
-     * @param  string   $subcategoria   Nome da subcategoria.
+     * @param  int   $id   identificador da Categoria
      * @return object;
     */
     public function get_cards($id)
@@ -43,6 +42,11 @@ class Home_model extends CI_Model{
         return $produto;
     }
 
+    /**
+     * Pega todos os dados necessários para montar os card, porem de forma aleatorio.
+     * @access public
+     * @return object;
+    */
     public function get_jogos_aleatorio()
     {
         $jogos = $this->db->get_where("Produto", "status = 1")->result();
@@ -70,6 +74,12 @@ class Home_model extends CI_Model{
         return $card;
     }
 
+    /**
+     * Consulta as informações da categoria pelo nome
+     * @access public
+     * @param  string   $categoria   nome da categoria
+     * @return object;
+    */
     public function categoria_by_nome($categoria)
     {
         $query = $this->db->get_where("Categoria", "nome = '$categoria'")->row();
@@ -77,6 +87,12 @@ class Home_model extends CI_Model{
         return $query;
     }
 
+    /**
+     * Pega todas as informações de um jogo,
+     * @access public
+     * @param  int   $id   identificador do Jogo
+     * @return object;
+    */
     public function get_jogo_info($id)
     {
         $query = $this->db->get_where("Produto", "id = '$id'")->row();
@@ -101,6 +117,12 @@ class Home_model extends CI_Model{
         return $query;
     }
 
+    /**
+     * Realiza o favotito de um jogo
+     * @access public
+     * @param  int   $id   identificador do Jogo
+     * @return object;
+    */
     public function favoritar()
     {
         $data = (object)$this->input->post();
@@ -146,6 +168,11 @@ class Home_model extends CI_Model{
         return $rst;
     }
 
+    /**
+     * Realiza o cadastro de um pergunta
+     * @access public
+     * @return object;
+    */
     public function cadastrar_pergunta()
     {
         $data = (object)$this->input->post();
@@ -176,6 +203,11 @@ class Home_model extends CI_Model{
         return $rst;
     }
 
+    /**
+     * Efetua a compra do jogo
+     * @access public
+     * @return object;
+    */
     public function compra_jogo()
     {
         $data = (object)$this->input->post();
@@ -201,6 +233,12 @@ class Home_model extends CI_Model{
         return $rst;
     }
 
+    /**
+     * Realiza a verificação no texto, para maior segurança.
+     * @access private
+     * @param  string   $dado   Texto a ser verificado.
+     * @return boolean;
+    */
     private function verifica_seguranca($dado)
     {
         $palavras = palavra_proibidas();

@@ -9,6 +9,11 @@ class Produto_model extends CI_Model{
         $this->dados = $this->session->userdata("dados" . APPNAME);
     }
 
+    /**
+     * consulta todas as categorias cadastradas
+     * @access public
+     * @return object;
+    */
     public function get_categorias()
     {
         $query = $this->db->get("Categoria")->result();
@@ -16,6 +21,11 @@ class Produto_model extends CI_Model{
         return $query;
     }
 
+    /**
+     * consulta todas as marcas cadastradas
+     * @access public
+     * @return object;
+    */
     public function get_marcas()
     {
         $query = $this->db->get("Marca")->result();
@@ -23,6 +33,11 @@ class Produto_model extends CI_Model{
         return $query;
     }
 
+    /**
+     * Pegas todas as informações de um jogo
+     * @access public
+     * @return object;
+    */
     public function get_jogo_info($id)
     {
         $query = $this->db->get_where("Produto", "id = $id")->row();
@@ -46,7 +61,11 @@ class Produto_model extends CI_Model{
         return $query;
     }
 
-
+    /**
+     * Realiza o cadastro/edição de um jogo
+     * @access public
+     * @return object;
+    */
     public function cadastra()
     {
         $rst = (object)array("rst" => false, "msg" => "");
@@ -135,6 +154,12 @@ class Produto_model extends CI_Model{
         return $rst;
     }
 
+    /**
+     * Realiza a inserção da imagem do jogo
+     * @access public
+     * @param   int     $id     identificador do jogo
+     * @return object;
+    */
     public function set_img ($id)
     {
         $files = $this->session->userdata("files".APPNAME);
@@ -162,6 +187,13 @@ class Produto_model extends CI_Model{
         }
     }
 
+    /**
+     * Realiza a definição da imagem principal do jogo
+     * @access public
+     * @param   string  $checked    tipo de ação que será realizada (principal ou não principal)
+     * @param   int     $id         identificador da Imagem
+     * @return boolean;
+    */
     public function definir_principal($checked, $id)
     {
         $query = $this->db->get_where("Imagem", "id = $id")->row();
@@ -202,6 +234,12 @@ class Produto_model extends CI_Model{
         }
     }
 
+    /**
+     * Realiza a exclusão de uma imagem
+     * @access public
+     * @param   int    $id  identificador da imagem
+     * @return object;
+    */
     public function excluir($id)
     {
         $img = $this->db->get_where("Imagem", "id = $id")->row();
