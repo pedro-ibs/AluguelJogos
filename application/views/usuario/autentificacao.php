@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row justify-content-md-center justify-content-md-center">
         <div class="col-md-auto">
-            <div class="card card-outline card-warning">
+            <div class="card card-outline card-danger">
                 <div class="card-header text-center">
-                    <a href="<?= base_url("Home") ?>" class="h1">Nome do Site</a>
+                    <a href="<?= base_url("Home") ?>" class="h1">Re:Play</a>
                 </div>
                 <div class="card-body">
                     <p class="login-box-msg">Autentifique-se para melhorar sua navegação &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
@@ -31,7 +31,7 @@
                         </div>
                     </form>
                     <p class="mb-1">
-                        <a href="<?= base_url("Usuario/esqueci_senha") ?>">Esqueci a senha</a>
+                        <!-- <a href="<?= base_url("Usuario/esqueci_senha") ?>">Esqueci a senha</a> -->
                     </p>
                     <p class="mb-0">
                         <a href="<?= base_url("Usuario") ?>" class="text-center">Não possui cadastro ainda? Realize agora!</a>
