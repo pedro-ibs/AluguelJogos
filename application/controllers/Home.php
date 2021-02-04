@@ -40,6 +40,10 @@ class Home extends CI_Controller{
         //Faz a parte das categorias.
         $this->data["breadcrumb"] = (object)array("titulo" => "Lista de jogos", "before" => array((object) array("nome" => "Home", "link" => "Home")), "current" => ucfirst($categoria));
 
+        $this->data["javascript"] = [
+            base_url("assets/js/home/lista.js")
+        ];
+
         $this->data["content"] = $this->load->view("home/lista", $this->data, true);
         $this->load->view("template/content", $this->data);
     }

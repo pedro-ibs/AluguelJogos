@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 pb-4">
-            <a href="<?= base_url("Produto/jogo") ?>" class="btn btn-outline-danger btn-lg float-right">Cadastrar um Produto</a>
+            <button type="button" id="cadastra_produto" class="btn btn-outline-danger btn-lg float-right">Cadastrar um Produto</button>
         </div>
         <div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <div class="row">
