@@ -9,6 +9,13 @@ class Home_model extends CI_Model{
         $this->dados = $this->session->userdata("dados" . APPNAME);
     }
 
+    /**
+     * Realiza a consulta de todas as subcategorias que estão dentro da categoria, com excecão do subcategoria que já está sendo acessada.
+     * @access public
+     * @param  string   $categoria   Nome da categoria.
+     * @param  string   $subcategoria   Nome da subcategoria.
+     * @return object;
+    */
     public function get_cards($id)
     {
         $query = $this->db->get_where("Jogo_categoria", "id_categoria = $id")->result();
