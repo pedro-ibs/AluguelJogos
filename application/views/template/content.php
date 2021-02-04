@@ -34,7 +34,7 @@
         <!-- /.content -->
     </div>
     <footer class="main-footer">
-        <strong>Copyright &copy; 2020 <a href="https://adminlte.io">Nome do Site</a>.</strong> Todos os direitos reservados.
+        <strong>Copyright &copy; 2020 <a href="https://adminlte.io">Re:Play</a>.</strong> Todos os direitos reservados.
     </footer>
     <?= $footer ?>
     <?php if(isset($javascript) && !empty($javascript)): ?>
