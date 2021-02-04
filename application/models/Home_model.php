@@ -63,6 +63,7 @@ class Home_model extends CI_Model{
 
             $jogos[$i]->imagem = $this->db->get_where("Imagem", "id_produto = ".$jogos[$i]->id." AND principal = 1")->row();
 
+            
             $this->db->select("id_categoria");
             $jogos[$i]->id_categoria = $this->db->get_where("Jogo_categoria", "id_produto = ".$jogos[$i]->id)->row()->id_categoria;
 

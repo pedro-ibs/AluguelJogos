@@ -35,3 +35,7 @@
   <link rel="stylesheet" href="<?= base_url("assets/plugins/dropzone/min/dropzone.min.css") ?>">
   <!-- BS Stepper -->
   <link rel="stylesheet" href="<?= base_url("assets/plugins/bs-stepper/css/bs-stepper.min.css") ?>">
+
+  <!-- chat -->
+  <link rel="stylesheet" href="<?= base_url("assets/chat/chat.css") ?>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

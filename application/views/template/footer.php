@@ -47,6 +47,8 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?= base_url("assets/plugins/dist/js/pages/dashboard.js") ?>"></script>
 
+<!-- chat -->
+<script src="<?= base_url("assets/chat/chat.js") ?>"></script>
 
 <script type="text/javascript">
     var BASE_URL = "<?= base_url() ?>";

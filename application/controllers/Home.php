@@ -22,6 +22,7 @@ class Home extends CI_Controller{
         $this->data["header"] = $this->load->view("template/header", $this->data, true);
         $this->data["navbar"] = $this->load->view("template/navbar", $this->data, true);
         $this->data["footer"] = $this->load->view("template/footer", $this->data, true);
+        $this->data["chat"]     = "";
     }
 
     public function index()
@@ -49,11 +50,15 @@ class Home extends CI_Controller{
     }
 
     public function detalhes($categoria, $id)
-    {
+    {   
+        $this->load->library("chat");
+
         $categoria = urldecode($categoria);
         $this->data["info"] = $this->m_home->get_jogo_info($id);
         $id_categoria = $this->m_home->categoria_by_nome($categoria);
         $this->data["breadcrumb"] = (object)array("titulo" => "Detalhes do jogo", "before" => array((object)array("nome" => "Home", "link" => "Home"), (object)array("nome" => ucfirst($categoria), "link" => "Home/lista/$categoria/$id_categoria->id")), "current" => $this->data["info"]->titulo);
+
+        $this->data["chat"] = $this->chat->gerarHtmlChat($this->dados->usuario_id, $id);
 
         $this->data["javascript"] = [
             base_url("assets/js/home/detalhes.js")
