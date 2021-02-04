@@ -174,5 +174,15 @@ function limpa_uploads ()
     }
 }
 
+function troca_verbo($tipo)
+{
+    if($tipo == 1)
+        return "Vendido";
+    elseif($tipo == 2)
+        return "Trocado";
+    else
+        return "Alugado";
+}
+
 /* End of file formatacao_helper.php */
 /* Location: ./application/helpers/formatacao_helper.php */

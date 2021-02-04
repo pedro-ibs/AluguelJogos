@@ -50,7 +50,7 @@
                                         <hr>
                                         <div class="mt-4">
                                             <h2 class="mb-0">
-                                            <?= "R$ ".$info->preco ?>
+                                            <?= $info->preco ?>
                                             </h2>
                                         </div>
 
@@ -59,10 +59,10 @@
                                         </div> -->
 
                                         <div class="mt-4">
-                                            <a href="" class="btn btn-warning btn-block btn-lg">
+                                            <button type="button" id="contratar" class="btn btn-warning btn-block btn-lg">
                                                 <i class="fas fa-handshake"></i>
                                                 <?= $info->tipo->nome ?>
-                                            </a>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

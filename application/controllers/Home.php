@@ -18,10 +18,6 @@ class Home extends CI_Controller{
         $this->data["local"] = $local;
 
         $this->data["categorias"] = $this->m_sistema->get_categorias();
-        // echo '<pre>';
-        // print_r($this->data["categorias"]);
-        // echo '</pre>';
-        // exit;
 
         $this->data["header"] = $this->load->view("template/header", $this->data, true);
         $this->data["navbar"] = $this->load->view("template/navbar", $this->data, true);
@@ -38,6 +34,7 @@ class Home extends CI_Controller{
 
     public function lista($categoria = null, $id = null)
     {
+        $categoria = urldecode($categoria);
         $this->data["cards"] = $this->m_home->get_cards($id);
         $this->data["categoria"] = $categoria;
         //Faz a parte das categorias.
@@ -72,6 +69,12 @@ class Home extends CI_Controller{
     {
         $rst = $this->m_home->cadastrar_pergunta();
         echo  json_encode($rst, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function compra_jogo()
+    {
+        $rst = $this->m_home->compra_jogo();
+        echo json_encode($rst, JSON_UNESCAPED_UNICODE);
     }
 
 }

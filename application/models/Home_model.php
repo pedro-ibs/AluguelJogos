@@ -16,7 +16,7 @@ class Home_model extends CI_Model{
         $produto = array();
         foreach($query as $item)
         {
-            $query2 = $this->db->get_where("Produto", "id = $item->id_produto")->result();
+            $query2 = $this->db->get_where("Produto", "id = '$item->id_produto' AND status = 1")->result();
             if($query2)
                 $produto = array_merge($produto, $query2);
         }
@@ -38,7 +38,7 @@ class Home_model extends CI_Model{
 
     public function get_jogos_aleatorio()
     {
-        $jogos = $this->db->get_where("Produto")->result();
+        $jogos = $this->db->get_where("Produto", "status = 1")->result();
 
         shuffle($jogos);
 
@@ -164,6 +164,31 @@ class Home_model extends CI_Model{
         else
         {
             $rst->msg = "Erro ao registrar a pergunta, tente novamente mais tarde.";
+        }
+
+        return $rst;
+    }
+
+    public function compra_jogo()
+    {
+        $data = (object)$this->input->post();
+        $rst = (object)array("rst" => false, "msg" => "", "tipo" => "");
+
+        $query = $this->db->get_where("Produto", "id = '$data->id_jogo'")->row();
+
+        $this->db->set("id_usuario", $this->dados->usuario_id);
+        $this->db->set("id_jogo", $data->id_jogo);
+
+        if($this->db->insert("Solicitacao_jogo"))
+        {
+            $this->db->set("status", 0);
+
+            $this->db->where("id", $data->id_jogo);
+            if($this->db->update("Produto"))
+            {
+                $rst->rst = true;
+                $rst->tipo = troca_verbo($query->tipo);
+            }
         }
 
         return $rst;
