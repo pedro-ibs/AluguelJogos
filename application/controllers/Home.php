@@ -58,7 +58,7 @@ class Home extends CI_Controller{
         $id_categoria = $this->m_home->categoria_by_nome($categoria);
         $this->data["breadcrumb"] = (object)array("titulo" => "Detalhes do jogo", "before" => array((object)array("nome" => "Home", "link" => "Home"), (object)array("nome" => ucfirst($categoria), "link" => "Home/lista/$categoria/$id_categoria->id")), "current" => $this->data["info"]->titulo);
 
-        $this->data["chat"] = $this->chat->gerarHtmlChat($this->dados->usuario_id, $id);
+        $this->data["chat"] = $this->chat->gerarHtmlChat(@$this->dados->usuario_id, $id);
 
         $this->data["javascript"] = [
             base_url("assets/js/home/detalhes.js")

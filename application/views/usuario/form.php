@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 pt-5">
-            <div class="card card-primary">
+            <div class="card card-danger">
                 <div class="card-header">
                     <h3 class="card-title">Formulário de Cadastro de Novos Usuarios</h3>
                 </div>
