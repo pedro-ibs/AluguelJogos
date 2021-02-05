@@ -32,7 +32,7 @@ class Home_model extends CI_Model{
         foreach($produto as $item)
         {
             if($this->dados)
-                $item->favorito = $this->db->get_where("Favorito", "id_produto = '$item->id' AND id_usuario = '".$this->dados->usuario_id."'")->result();
+                $item->favorito = $this->db->get_where("Favorito", "id_produto = '$item->id' AND id_usuario = '".$this->dados->usuario_id."'")->row();
             else
                 $item->favorito = (object)array();
             
