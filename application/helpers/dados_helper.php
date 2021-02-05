@@ -45,15 +45,11 @@
             "order",
             "group",
             "function",
-            "and",
-            "add",
-            "as",
             "--",
             "continue",
             "break",
             "case",
             "into",
-            "if",
             "having",
             "from",
             "kill",
@@ -76,7 +72,6 @@
             "where",
             "when",
             "values",
-            "use",
             "varchar"
         );
     }

@@ -45,11 +45,11 @@
 }
 
 /* Add a red background color to the cancel button */
-.form-container .cancel {
+.form-container .cancelar {
     background-color: #dc3545;
 }
 
-.cancel{
+.cancelar{
     width:  48px !important; 
     height: 48px !important;
 }

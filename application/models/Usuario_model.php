@@ -18,6 +18,11 @@ class Usuario_model extends CI_Model{
         "usuario_id" => 0,
     );
 
+    /**
+     * Consulta todos os usuarios do sistema
+     * @access public
+     * @return object;
+    */
     public function get_usuario()
     {
         $query = $this->db->get("Usuario")->result();
@@ -25,6 +30,11 @@ class Usuario_model extends CI_Model{
         return $query;
     }
 
+    /**
+     * Consulta as informações do usuario logado.
+     * @access public
+     * @return object;
+    */
     public function get_info_perfil()
     {
         $query = $this->db->get_where("Usuario", "id = ".$this->dados->usuario_id)->row();
@@ -32,6 +42,11 @@ class Usuario_model extends CI_Model{
         return $query;
     }
 
+    /**
+     * Reliza a autentificação do usuario
+     * @access public
+     * @return object;
+    */
     public function autentifica()
     {
         $data = (object)$this->input->post();
@@ -71,10 +86,30 @@ class Usuario_model extends CI_Model{
         return $loginData;
     }
 
+    /**
+     * Realiza o cadastro/edição dos dados dos usuarios
+     * @access public
+     * @return object;
+    */
     public function geren_usuario()
     {
         $data = (object)$this->input->post();
         $rst = (object)array("rst" => 0, "msg" => "");
+
+        if($this->verifica_seguranca($data->email))
+        {
+            $rst->rst = false;
+            $rst->msg = "Palavra utilizada para o acesso é proibida!";
+
+            return $rst;
+        }
+        if($this->verifica_seguranca($data->senha))
+        {
+            $rst->rst = false;
+            $rst->msg = "Palavra utilizada para o acesso é proibida!";
+
+            return $rst;
+        }
 
         if($this->verifica_email(strtolower($data->email)) && (!isset($data->id_usuario) || isset($data->id_usuario) && empty($data->id_usuario)))
         {
@@ -119,6 +154,12 @@ class Usuario_model extends CI_Model{
         return $rst;
     }
 
+    /**
+     * Realiza a verifição se o email está cadastrado no sistema.
+     * @access public
+     * @param   string  $email  email do usuario
+     * @return object;
+    */
     public function verifica_email($email)
     {
         $query = $this->db->get_where("Usuario", "email = '$email'")->row();
@@ -133,6 +174,12 @@ class Usuario_model extends CI_Model{
         }
     }
 
+    /**
+     * Realiza a verificação no texto, para maior segurança.
+     * @access private
+     * @param  string   $dado   Texto a ser verificado.
+     * @return boolean;
+    */
     private function verifica_seguranca($dado)
     {
         $palavras = palavra_proibidas();

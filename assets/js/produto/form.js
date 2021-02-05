@@ -3,15 +3,15 @@ $(document).ready(function(){
     var img = [];
     var myDropzone;
 
-    $("#preco").inputmask( 'currency',{"autoUnmask": true,
-        radixPoint:",",
-        groupSeparator: ".",
-        allowMinus: false,
-        prefix: 'R$ ',            
-        digits: 2,
-        digitsOptional: false,
-        rightAlign: true,
-        unmaskAsNumber: true
+    $("#preco").inputmask('decimal', {
+        'alias': 'numeric',
+        'groupSeparator': ',',
+        'autoGroup': true,
+        'digits': 2,
+        'radixPoint': ".",
+        'digitsOptional': false,
+        'allowMinus': false,
+        'prefix': 'R$ ',
     });
 
     // BS-Stepper Init
@@ -29,7 +29,7 @@ $(document).ready(function(){
     previewNode.parentNode.removeChild(previewNode);
 
     myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-        url: "/target-url", // Set the url
+        url: BASE_URL+"Produto/set_files", // Set the url
         thumbnailWidth: 80,
         thumbnailHeight: 80,
         parallelUploads: 20,
@@ -44,11 +44,126 @@ $(document).ready(function(){
     };
     // DropzoneJS Demo Code End
 
-    //Quando for salvar o formulario realizar a montagem dos dados da img que será salva.
-    $(".fileinput-button").on("click", function(){
-        //myDropzone.files Todos os arquivos que tem para serem salvos
-        console.log(myDropzone.files[0]);//Todas as informações do arquivo
+    $("input[data-bootstrap-switch]").each(function(){
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
+
+    $("#submit").submit(function(e){
+        e.preventDefault();
+        var data = $(this).serialize();
+        files = myDropzone.files;
+        var erro = "";
+
+        for(i=0;i<files.length;i++)
+        {
+            tipo = files[i].name.split(".").pop().toLowerCase();
+            if(jQuery.inArray(tipo, ['gif','png','jpg','jpeg']) == -1)
+            {
+                if(erro != "")
+                    erro += ", ";
+                
+                erro += files[i].name + "";
+            }
+        }
+
+        if(erro)
+        {
+            showNotification("error", "Erro nas imagens cadastradas", "Tipo do arquivo não permitido. Por favor troque os seguintes arquivos: "+ erro, "toast-top-center", "15000");
+        }
+        else
+        {
+            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+            data = new FormData($("#submit").get(0));
+            setTimeout(() => { 
+
+                $.ajax({
+                    type: "post",
+                    url: BASE_URL+"Produto/cadastra",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    data: data,
+                    success: function(data)
+                    {
+                        if(data.rst === true)
+                        {
+                            Swal.fire({
+                                title: 'Sucesso',
+                                text: data.msg,
+                                icon: 'success',
+                                confirmButtonText: `Ok`,
+                                }).then((result) => {
+                                if (result.isConfirmed)
+                                    window.location.href = BASE_URL+"Produto/jogo/"+data.id_jogo;
+                            })
+                        }
+                        else if(data.rst === false)
+                        {
+                            showNotification("warning", "Erro", data.msg, "toast-top-center", "15000");
+                        }
+                    }
+                });
+
+            }, 2000);
+        }
+    });
+
+    $(".principal").on("click", function(){
+        var checked = this.checked == true ? 1 : 0;
+        var id = this.dataset.id;
+        $.ajax({
+            type: "post",
+            url: BASE_URL+"Produto/definir_principal/"+checked+"/"+id,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            success: function(data)
+            {
+                if(data == true)
+                {
+                    $(".principal").attr("checked", false);
+                    $("#principal"+id).attr("checked", true);
+                    showNotification("success", "Sucesso", "Configuração da imagem atualizada", "toast-top-center", "10000");
+                }
+                else
+                {
+                    showNotification("error", "Erro", "Problema ao atualizar os dados de configuração da imagem.", "toast-top-center", "10000");
+                }
+            }
+        });        
+    });
+
+    $(".excluir").on("click", function(e){
+        e.preventDefault();
+        var id = this.dataset.id;
+        $.ajax({
+            type: "post",
+            url: BASE_URL+"Produto/excluir/"+id,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            success: function(data)
+            {
+                if(data.rst == true)
+                {
+                    Swal.fire({
+                        title: 'Sucesso',
+                        text: "Imagem Excluida com sucesso",
+                        icon: 'success',
+                        confirmButtonText: `Ok`,
+                        }).then((result) => {
+                        if (result.isConfirmed)
+                            window.location.href = BASE_URL+"Produto/jogo/"+data.id;
+                    })
+                }
+                else
+                {
+                    showNotification("error", "Erro", "Não foi possivel realizar a exclusão da imagem, tente novamente mais tarde.", "toast-top-center", "10000");
+                }
+            }
+        }); 
     })
-
-
 });

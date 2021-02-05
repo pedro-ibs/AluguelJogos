@@ -1,6 +1,8 @@
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nome do Site</title>
+  <title>Re:Play</title>
+
+  <link rel="shortcut icon" href="<?= base_url("assets/img/favicon.png") ?>" />
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -33,3 +35,7 @@
   <link rel="stylesheet" href="<?= base_url("assets/plugins/dropzone/min/dropzone.min.css") ?>">
   <!-- BS Stepper -->
   <link rel="stylesheet" href="<?= base_url("assets/plugins/bs-stepper/css/bs-stepper.min.css") ?>">
+
+  <!-- chat -->
+  <link rel="stylesheet" href="<?= base_url("assets/chat/chat.css") ?>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

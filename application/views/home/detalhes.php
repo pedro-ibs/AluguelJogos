@@ -12,11 +12,11 @@
                                 <div class="row">
                                     <div class="col-md-8 col-sm-12">
                                         <div class="col-12">
-                                            <img src="<?= $info->imagem[0]->img ?>" class="product-image" alt="Product Image" >
+                                            <img src="<?= "data:".$info->imagem[0]->tipo.";base64,".$info->imagem[0]->img ?>" class="product-image" alt="Product Image" >
                                         </div>
                                         <div class="col-12 product-image-thumbs">
                                             <?php foreach($info->imagem as $item): ?>
-                                                <div class="product-image-thumb active"><img src="<?= $item->img ?>"  alt="Product Image"></div>
+                                                <div class="product-image-thumb active"><img src="<?= "data:".$item->tipo.";base64,".$item->img ?>"  alt="Product Image"></div>
                                             <?php endforeach; ?>
                                         </div>
                                     </div>
@@ -50,7 +50,7 @@
                                         <hr>
                                         <div class="mt-4">
                                             <h2 class="mb-0">
-                                            <?= "R$ ".$info->preco ?>
+                                            <?= $info->preco ?>
                                             </h2>
                                         </div>
 
@@ -59,10 +59,10 @@
                                         </div> -->
 
                                         <div class="mt-4">
-                                            <a href="" class="btn btn-warning btn-block btn-lg">
+                                            <button type="button" id="contratar" class="btn btn-warning btn-block btn-lg">
                                                 <i class="fas fa-handshake"></i>
                                                 <?= $info->tipo->nome ?>
-                                            </a>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -103,20 +103,30 @@
                                                 <h3 class="card-title text-bold">Ultimas Realizadas</h3>
                                                 <br/>
                                                 <br/>
-                                                <!-- <?php foreach($info->perguntas as $item): ?>
-                                                <h6 class="text-justify"><?= $item->pergunta ?>.</h6>
-                                                <ul>
-                                                    <li><span class="text-muted"><?= $item->resposta ?>.  <small>- <?= formatar($item->data_resposta, "bd2dt") ?></small></span</li>
-                                                </ul>
-                                                <?php endforeach; ?> -->
-                                                <h6 class="text-justify">Uma pergunta bem longa e muito bem escrita sem nenhum erro de portugues ou nada disso.</h6>
-                                                <ul>
-                                                    <li><span class="text-muted">Uma resposta muito bem elaborado e descrita sem algum tipo de erro.  <small>- 27/12/2020</small></span</li>
-                                                </ul>
+                                                <div class="pergunta">
+                                                    <?php if($info->perguntas): ?>
+                                                        <?php foreach($info->perguntas as $item): ?>
+                                                        <h6 class="text-justify"><?= $item->pergunta ?>.</h6>
+                                                        <ul>
+                                                            <?php if($item->resposta): ?>
+                                                                <li><span class="text-muted"><?= $item->resposta ?>.  <small>- <?= formatar($item->data_resposta, "bd2dt") ?></small></span</li>
+                                                            <?php else: ?>
+                                                                <li><span class="text-muted">Sem resposta ainda!</span</li>
+                                                            <?php endif; ?>
+                                                        </ul>
+                                                        <?php endforeach; ?>
+                                                    <?php else: ?>
+                                                        <div class="callout callout-warning mensagem_pergunta">
+                                                            <p>Este Jogo ainda não possui perguntas. Seja o primeiro a realizar.</p>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" id="id_jogo" value="<?= $info->id ?>"/>
+                                <input type="hidden" id="id_usuario" value="<?= $info->id_usuario ?>"/>
                             </div>
                         </div>
                     </div>

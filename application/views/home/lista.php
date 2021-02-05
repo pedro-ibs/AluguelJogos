@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 pb-4">
-            <a href="<?= base_url("Produto/jogo") ?>" class="btn btn-outline-danger btn-lg float-right">Cadastrar um Produto</a>
+            <button type="button" id="cadastra_produto" class="btn btn-outline-danger btn-lg float-right">Cadastrar um Produto</button>
         </div>
         <div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <div class="row">
@@ -53,7 +53,7 @@
                     <?php foreach($cards as $item): ?>
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-xs-12 pb-4">
                             <div class="card h-100">
-                                <img src="<?= $item->imagem ? $item->imagem->img : "https://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_AnimalCrossingNewHorizons_image1600w.jpg" ?>" class="card-img-top" alt="...">
+                                <img src="<?= $item->imagem ? "data:".$item->imagem->tipo.";base64,".$item->imagem->img : "https://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_AnimalCrossingNewHorizons_image1600w.jpg" ?>" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h3 class="card-title text-bold"><?= $item->titulo ?></h3>
                                     <span id="fav<?= $item->id ?>" class="text-right">
@@ -67,7 +67,7 @@
                                     <p class="text-justify"><?= $item->descricao_jogo ?></p>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="<?= base_url("Home/detalhes/".$item->id) ?>" class="btn btn-block btn-outline-danger">Ver Mais</a>
+                                    <a href="<?= base_url("Home/detalhes/".$categoria."/".$item->id) ?>" class="btn btn-block btn-outline-danger">Ver Mais</a>
                                 </div>
                             </div>
                         </div>
